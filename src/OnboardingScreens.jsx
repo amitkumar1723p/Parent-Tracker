@@ -9,9 +9,9 @@ import {
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
-import amit from '../assets/images/amit.jpg';
 
- import banner1 from '../assets/images/banner-1.jpg';
+import amit from '../assets/images/amit.jpg';
+import banner1 from '../assets/images/banner-1.jpg';
 const { width } = Dimensions.get("window");
 
  const Onboarding1 = ({ onNext, onSkip }) => {
@@ -64,6 +64,7 @@ const Onboarding2 =     ({ onNext, onSkip }) => (
       Set up safe zones and get instant alerts when your family members arrive
       or leave important places
     </Text>
+
     <View style={styles.dots}>
       <View style={styles.inactiveDot} />
       <View style={styles.activeDot} />

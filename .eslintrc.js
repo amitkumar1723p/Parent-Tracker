@@ -60,6 +60,8 @@ module.exports = {
     'no-unused-expressions': 'error',
     // 'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'react-native/no-color-literals': 'off',
+    'react-native/sort-styles':'off',
+    'no-unescaped-entities' :'off'
 
     // ✅ List render karte waqt har child ko unique "key" dena zaroori hai
     // Agar key nahi di toh ESLint error dega (ye tumhare team ko visible hoga)
@@ -77,4 +79,9 @@ module.exports = {
       },
     },
   },
+//   'react-native/sort-styles': [
+//   'error',
+//   'asc',
+//   { ignoreClassNames: false, ignoreStyleProperties: false },
+// ],
 };
