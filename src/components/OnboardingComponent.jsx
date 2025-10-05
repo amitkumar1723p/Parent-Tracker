@@ -10,21 +10,26 @@ import {
 import LinearGradient from "react-native-linear-gradient";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
-import amit from '../assets/images/amit.jpg';
-import banner1 from '../assets/images/banner-1.jpg';
+ import banner1 from '../../assets/images/banner-1.jpg'
+ import banner2 from '../../assets/images/banner-2.jpg'
+ import banner3 from '../../assets/images/banner-3.jpg'
 const { width } = Dimensions.get("window");
 
- const Onboarding1 = ({ onNext, onSkip }) => {
-   const insets = useSafeAreaInsets(); // yaha se top padding milega
-  <SafeAreaView style={styles.container}>
+
+ const Onboarding1 = ({ onNext, onFinish }) => {
+ const insets = useSafeAreaInsets(); // yaha se top padding milega
+
+  return <>
+
+   <SafeAreaView style={styles.container}>
     <Text style={[styles.skip, { top: insets.top + 10 }]} // safe area ke niche 10 px
 
-    onPress={onSkip}>Skip</Text>
+    onPress={onFinish}>Skip</Text>
 
     <Image
       source={banner1} // apna image lagao
       style={styles.image}
-      resizeMode="contain"
+
 
     />
 
@@ -41,24 +46,40 @@ const { width } = Dimensions.get("window");
     </View>
     <TouchableOpacity onPress={onNext}>
       <LinearGradient
-        colors={["#007BFF", "#00C851"]}
+    colors={["#007BFF", "#00C851"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
         style={styles.button}
       >
         <Text style={styles.buttonText}>Next</Text>
       </LinearGradient>
     </TouchableOpacity>
   </SafeAreaView>
+
+   </>
+
+
  }
 
-const Onboarding2 =     ({ onNext, onSkip }) => (
-  <SafeAreaView style={styles.container}>
-    <Text style={styles.skip} onPress={onSkip}>Skip</Text>
-    <Image
+const Onboarding2 =     ({ onNext, onFinish }) =>  {
+
+
+   const insets = useSafeAreaInsets(); // yaha se top padding milega
+   return ( <SafeAreaView style={styles.container}>
+    <Text style={[styles.skip, { top: insets.top + 10 }]} // safe area ke niche 10 px
+
+    onPress={onFinish}>Skip</Text>
+
+ <Image
     //   source={amit} // apna image lagao
-      source={amit}   // ✅ sahi tarika
+      source={banner2}   // ✅ sahi tarika
       style={styles.image}
-      resizeMode="contain"
+
     />
+
+
+
+
     <Text style={styles.title}>Smart Geofencing</Text>
     <Text style={styles.subtitle}>
       Set up safe zones and get instant alerts when your family members arrive
@@ -72,23 +93,34 @@ const Onboarding2 =     ({ onNext, onSkip }) => (
     </View>
     <TouchableOpacity onPress={onNext}>
       <LinearGradient
-        colors={["#007BFF", "#00C851"]}
+      colors={["#007BFF", "#00C851"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
         style={styles.button}
       >
         <Text style={styles.buttonText}>Next</Text>
       </LinearGradient>
     </TouchableOpacity>
-  </SafeAreaView>
-);
+  </SafeAreaView>)
 
-const Onboarding3 = ({ onFinish, onSkip }) => (
-  <SafeAreaView style={styles.container}>
-    <Text style={styles.skip} onPress={onSkip}>Skip</Text>
+}
+
+const Onboarding3 = ({ onFinish, onSkip }) =>  {
+   const insets = useSafeAreaInsets(); // yaha se top padding milega
+
+  return (
+ <SafeAreaView style={styles.container}>
+     <Text style={[styles.skip, { top: insets.top + 10 }]} // safe area ke niche 10 px
+
+    onPress={onFinish}>Skip</Text>
+
+
     <Image
-      source={amit} // apna image lagao
+      source={banner3} // apna image lagao
       style={styles.image}
-      resizeMode="contain"
+      // resizeMode=""
     />
+
     <Text style={styles.title}>AI-Powered Insights</Text>
     <Text style={styles.subtitle}>
       Get intelligent daily summaries and insights about your family's
@@ -99,16 +131,21 @@ const Onboarding3 = ({ onFinish, onSkip }) => (
       <View style={styles.inactiveDot} />
       <View style={styles.activeDot} />
     </View>
-    <TouchableOpacity onPress={onFinish}>
+
+     <TouchableOpacity onPress={ onFinish} activeOpacity={0.8}>
       <LinearGradient
         colors={["#007BFF", "#00C851"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
         style={styles.button}
       >
-        <Text style={styles.buttonText}>Get   Started</Text>
+        <Text style={styles.buttonText}>Get Started</Text>
       </LinearGradient>
     </TouchableOpacity>
   </SafeAreaView>
-);
+  )
+
+}
 
 export { Onboarding1, Onboarding2, Onboarding3 };
 
@@ -120,17 +157,7 @@ const styles = StyleSheet.create({
     margin: 4,
     width: 8,
   },
-  button: {
-    alignItems: "center",
-    borderRadius: 25,
-    padding: 12,
-    width: width * 0.6,
-  },
-  buttonText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "600",
-  },
+
   container: {
     flex: 1,
 
@@ -138,8 +165,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     // padding: 20,
-    borderBlockColor:'red',
-    borderWidth:2
+    // borderBlockColor:'red',
+    // borderWidth:2
   },
   dots: {
     flexDirection: "row",
@@ -147,7 +174,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: width * 0.8,
-    // height: width * 0.5,
+    height: width * 0.5,
     marginVertical: 20,
       backgroundColor: "#fff",
     borderRadius: 12,
@@ -163,6 +190,8 @@ const styles = StyleSheet.create({
     elevation: 6,
 
   },
+
+
   inactiveDot: {
     backgroundColor: "#CCC",
     borderRadius: 4,
@@ -192,4 +221,37 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     textAlign: "center",
   },
+
+
+  button: {
+    paddingVertical: 15,
+    paddingHorizontal: 40,
+    borderRadius: 30,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 3, // Android shadow
+     width: width * 0.6,
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+
+
+  // button: {
+  //   alignItems: "center",
+  //   borderRadius: 25,
+  //   padding: 12,
+  //   width: width * 0.6,
+  // },
+  // buttonText: {
+  //   color: "#fff",
+  //   fontSize: 16,
+  //   fontWeight: "600",
+  // },
 });
