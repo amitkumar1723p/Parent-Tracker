@@ -6,7 +6,7 @@ import React   from 'react'
 //  ic/components/OnboardingComponent'
 // import { ScrollView, Text , View } from 'react-native'
 
- import Onboarding from './src/screens/Onboarding'
+ import Onboarding from './src/screens/Onboarding/OnboardingScreen'
 import { NavigationContainer } from '@react-navigation/native'
 
 import { navigationRef, safeReplace } from './src/navigation/NavigationService';
@@ -15,14 +15,7 @@ import AppNavigator from './src/navigation/AppNavigator'
 const App = () => {
   return (
     <>
-
-
-
-    <NavigationContainer ref={navigationRef}>
       <AppNavigator />
-    </NavigationContainer>
-
-
     </>
 
   )

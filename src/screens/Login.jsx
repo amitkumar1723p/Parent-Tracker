@@ -1,18 +1,4 @@
-// import { View, Text } from 'react-native'
-// import React from 'react'
-
-// const Login = () => {
-//   return (
-//     <View>
-//       <Text>Login</Text>
-//     </View>
-//   )
-// }
-
-// export default Login
-
-
-import React, { useState } from "react";
+ import React, { useState } from "react";
 import {
   View,
   Text,
@@ -23,114 +9,128 @@ import {
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";
-// import Icon from "react-native-vector-icons/MaterialIcons";
-// import AntDesign from "react-native-vector-icons/AntDesign";
+import { navigate } from "../navigation/NavigationService";
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Logo Section */}
-      <View style={styles.header}>
-        <LinearGradient
-          colors={["#007BFF", "#00C851"]}
-          style={styles.logoContainer}
-        >
-          {/* <Icon name="location-pin" size={28} color="white" /> */}
-        </LinearGradient>
-        <Text style={styles.title}>SafeTracker</Text>
-        <Text style={styles.subtitle}>
-          Keep your family safe and connected
-        </Text>
-      </View>
+      {/* Top Background Gradient */}
+      <LinearGradient
+          colors={["#eff6ff", "#f0fdf4"]} // from-blue-50 → to-green-50
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      style={styles.topBackground}
 
-      {/* Tabs */}
-      <View style={styles.tabContainer}>
-        <TouchableOpacity
-          style={[styles.tab, isLogin && styles.activeTab]}
-          onPress={() => setIsLogin(true)}
-        >
-          <Text style={[styles.tabText, isLogin && styles.activeTabText]}>
-            Login
+
+
+      />
+
+      {/* Content */}
+      <View style={styles.content}>
+        {/* Logo Section */}
+        <View style={styles.header}>
+          <LinearGradient
+            colors={["#007BFF", "#00C851"]}
+            style={styles.logoContainer}
+          >
+            {/* <Icon name="location-pin" size={28} color="white" /> */}
+          </LinearGradient>
+          <Text style={styles.title}>SafeTracker</Text>
+          <Text style={styles.subtitle}>
+            Keep your family safe and connected
           </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.tab, !isLogin && styles.activeTab]}
-          onPress={() => setIsLogin(false)}
-        >
-          <Text style={[styles.tabText, !isLogin && styles.activeTabText]}>
-            Sign Up
-          </Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* Form Inputs */}
-      <View style={styles.form}>
-        <View style={styles.inputWrapper}>
-          {/* <Icon name="email" size={20} color="#aaa" /> */}
-          <TextInput
-            style={styles.input}
-            placeholder="Email address"
-            placeholderTextColor="#aaa"
-          />
-        </View>
-        <View style={styles.inputWrapper}>
-          {/* <Icon name="phone" size={20} color="#aaa" /> */}
-          <TextInput
-            style={styles.input}
-            placeholder="Phone number"
-            placeholderTextColor="#aaa"
-          />
-        </View>
-        <View style={styles.inputWrapper}>
-          {/* <Icon name="lock" size={20} color="#aaa" /> */}
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            secureTextEntry
-            placeholderTextColor="#aaa"
-          />
         </View>
 
-        {!isLogin && (
+        {/* Tabs */}
+        <View style={styles.tabContainer}>
+          <TouchableOpacity
+            style={[styles.tab, isLogin && styles.activeTab]}
+            onPress={() => setIsLogin(true)}
+          >
+            <Text style={[styles.tabText, isLogin && styles.activeTabText]}>
+              Login
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.tab, !isLogin && styles.activeTab]}
+            onPress={() => setIsLogin(false)}
+          >
+            <Text style={[styles.tabText, !isLogin && styles.activeTabText]}>
+              Sign Up
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Form Inputs */}
+        <View style={styles.form}>
+          <View style={styles.inputWrapper}>
+            {/* <Icon name="email" size={20} color="#aaa" /> */}
+            <TextInput
+              style={styles.input}
+              placeholder="Email address"
+              placeholderTextColor="#aaa"
+            />
+          </View>
+          <View style={styles.inputWrapper}>
+            {/* <Icon name="phone" size={20} color="#aaa" /> */}
+            <TextInput
+              style={styles.input}
+              placeholder="Phone number"
+              placeholderTextColor="#aaa"
+            />
+          </View>
           <View style={styles.inputWrapper}>
             {/* <Icon name="lock" size={20} color="#aaa" /> */}
             <TextInput
               style={styles.input}
-              placeholder="Confirm password"
+              placeholder="Password"
               secureTextEntry
               placeholderTextColor="#aaa"
             />
           </View>
-        )}
 
-        {/* Gradient Button */}
-        <TouchableOpacity style={{ marginTop: 20 }}>
-          <LinearGradient
-            colors={["#007BFF", "#00C851"]}
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>
-              {isLogin ? "Login" : "Create Account"}
-            </Text>
-          </LinearGradient>
+          {!isLogin && (
+            <View style={styles.inputWrapper}>
+              {/* <Icon name="lock" size={20} color="#aaa" /> */}
+              <TextInput
+                style={styles.input}
+                placeholder="Confirm password"
+                secureTextEntry
+                placeholderTextColor="#aaa"
+              />
+            </View>
+          )}
+
+          {/* Gradient Button */}
+          <TouchableOpacity style={{ marginTop: 20 }} onPress={()=>{
+            navigate('role-selector')
+          }} >
+            <LinearGradient
+              colors={["#007BFF", "#00C851"]}
+              style={styles.button}
+            >
+              <Text style={styles.buttonText}>
+                {isLogin ? "Login" : "Create Account"}
+              </Text>
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
+
+        {/* Divider */}
+        <View style={styles.dividerContainer}>
+          <View style={styles.divider} />
+          <Text style={styles.dividerText}>or continue with</Text>
+          <View style={styles.divider} />
+        </View>
+
+        {/* Google Button */}
+        <TouchableOpacity style={styles.googleButton}>
+          {/* <AntDesign name="google" size={20} color="#000" /> */}
+          <Text style={styles.googleButtonText}>Continue with Google</Text>
         </TouchableOpacity>
       </View>
-
-      {/* Divider */}
-      <View style={styles.dividerContainer}>
-        <View style={styles.divider} />
-        <Text style={styles.dividerText}>or continue with</Text>
-        <View style={styles.divider} />
-      </View>
-
-      {/* Google Button */}
-      <TouchableOpacity style={styles.googleButton}>
-        {/* <AntDesign name="google" size={20} color="#000" /> */}
-        <Text style={styles.googleButtonText}>Continue with Google</Text>
-      </TouchableOpacity>
-
     </SafeAreaView>
   );
 }
@@ -139,20 +139,25 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F9FAFB",
-    alignItems: "center",
-    paddingHorizontal: 20,
-backgroundColor:"green"
 
+  },
+  topBackground: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    height: "29%",
+  },
+  content: {
+    flex: 1,
+    justifyContent: "flex-start",
+    paddingHorizontal: 20,
   },
   header: {
     alignItems: "center",
     marginTop: 40,
-    backgroundColor: "red",
-    width : '100%'
-
   },
   logoContainer: {
-
     width: 60,
     height: 60,
     borderRadius: 15,
@@ -177,11 +182,12 @@ backgroundColor:"green"
     backgroundColor: "#f2f2f2",
     borderRadius: 25,
     padding: 3,
-     backgroundColor :"green"
+    alignSelf: "center",
   },
   tab: {
     flex: 1,
     paddingVertical: 10,
+    paddingHorizontal: 30,
     borderRadius: 20,
     alignItems: "center",
   },
@@ -251,6 +257,7 @@ backgroundColor:"green"
     borderRadius: 25,
     borderWidth: 1,
     borderColor: "#ddd",
+    alignSelf: "center",
   },
   googleButtonText: {
     marginLeft: 10,
