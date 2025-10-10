@@ -27,15 +27,17 @@ const { width } = Dimensions.get("window");
   return <>
 
 
-    <Text style={[styles.skip, { top: insets.top + 10 }]} // safe area ke niche 10 px
+    <Text style={[styles.skip]} // safe area ke niche 10 px
 
     onPress={onFinish}>Skip</Text>
+
+
+ <View style={{flex:1 ,  justifyContent:'center' ,alignItems:'center'}}>
+
 
     <Image
       source={banner1} // apna image lagao
       style={styles.image}
-
-
     />
 
     <Text style={styles.title}>Track Your Loved Ones</Text>
@@ -59,6 +61,10 @@ const { width } = Dimensions.get("window");
         <Text style={styles.buttonText}>Next</Text>
       </LinearGradient>
     </TouchableOpacity>
+
+</View>
+
+
   </>
 
 
@@ -71,18 +77,16 @@ const Onboarding2 =     ({ onNext, onFinish }) =>  {
 
    const insets = useSafeAreaInsets(); // yaha se top padding milega
    return ( < >
-    <Text style={[styles.skip, { top: insets.top + 10 }]} // safe area ke niche 10 px
+    <Text style={[styles.skip]} // safe area ke niche 10 px
 
     onPress={onFinish}>Skip</Text>
-
+ <View style={{flex:1 , justifyContent:'center' ,alignItems:'center'}}>
  <Image
     //   source={amit} // apna image lagao
       source={banner2}   // ✅ sahi tarika
       style={styles.image}
 
     />
-
-
 
 
     <Text style={styles.title}>Smart Geofencing</Text>
@@ -106,6 +110,8 @@ const Onboarding2 =     ({ onNext, onFinish }) =>  {
         <Text style={styles.buttonText}>Next</Text>
       </LinearGradient>
     </TouchableOpacity>
+
+</View>
   </>)
 
 }
@@ -115,11 +121,11 @@ const Onboarding3 = ({ onFinish, onSkip }) =>  {
 
   return (
  <>
-     <Text style={[styles.skip, { top: insets.top + 10 }]} // safe area ke niche 10 px
+     <Text style={[styles.skip]} // safe area ke niche 10 px
 
     onPress={onFinish}>Skip</Text>
 
-
+ <View style={{flex:1 ,  justifyContent:'center' ,alignItems:'center'}}>
     <Image
       source={banner3} // apna image lagao
       style={styles.image}
@@ -147,6 +153,7 @@ const Onboarding3 = ({ onFinish, onSkip }) =>  {
         <Text style={styles.buttonText}>Get Started</Text>
       </LinearGradient>
     </TouchableOpacity>
+    </View>
   </>
   )
 
@@ -198,12 +205,12 @@ const styles = StyleSheet.create({
     width: 8,
   },
   skip: {
- position: "absolute",   // top-right me fix karne ke liye
-               // distance from top
-  right: 20,              // distance from right
+
   fontSize: 16,
   color: "#007BFF",
   fontWeight: "600",
+  alignSelf:'flex-end'
+
   },
   subtitle: {
     color: "#555",
