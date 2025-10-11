@@ -27,9 +27,9 @@ const { width } = Dimensions.get("window");
   return <>
 
 
-    <Text style={[styles.skip]} // safe area ke niche 10 px
+    {/* <Text style={[styles.skip]} // safe area ke niche 10 px
 
-    onPress={onFinish}>Skip</Text>
+    onPress={onFinish}>Skip</Text> */}
 
 
  <View style={{flex:1 ,  justifyContent:'center' ,alignItems:'center'}}>
@@ -77,9 +77,9 @@ const Onboarding2 =     ({ onNext, onFinish }) =>  {
 
    const insets = useSafeAreaInsets(); // yaha se top padding milega
    return ( < >
-    <Text style={[styles.skip]} // safe area ke niche 10 px
+    {/* <Text style={[styles.skip]} // safe area ke niche 10 px
 
-    onPress={onFinish}>Skip</Text>
+    onPress={onFinish}>Skip</Text> */}
  <View style={{flex:1 , justifyContent:'center' ,alignItems:'center'}}>
  <Image
     //   source={amit} // apna image lagao
@@ -121,9 +121,9 @@ const Onboarding3 = ({ onFinish, onSkip }) =>  {
 
   return (
  <>
-     <Text style={[styles.skip]} // safe area ke niche 10 px
+     {/* <Text style={[styles.skip]} // safe area ke niche 10 px
 
-    onPress={onFinish}>Skip</Text>
+    onPress={onFinish}>Skip</Text> */}
 
  <View style={{flex:1 ,  justifyContent:'center' ,alignItems:'center'}}>
     <Image
@@ -162,6 +162,9 @@ const Onboarding3 = ({ onFinish, onSkip }) =>  {
 export { Onboarding1, Onboarding2, Onboarding3 };
 
 const styles = StyleSheet.create({
+
+
+
 
 
   activeDot: {
@@ -204,14 +207,14 @@ const styles = StyleSheet.create({
     margin: 4,
     width: 8,
   },
-  skip: {
+  // skip: {
 
-  fontSize: 16,
-  color: "#007BFF",
-  fontWeight: "600",
-  alignSelf:'flex-end'
+  // fontSize: 16,
+  // color: "#007BFF",
+  // fontWeight: "600",
+  // alignSelf:'flex-end'
 
-  },
+  // },
   subtitle: {
     color: "#555",
     fontSize: 14,

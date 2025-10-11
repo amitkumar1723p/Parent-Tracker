@@ -1,161 +1,187 @@
- import React, { useState } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
   TextInput,
   TouchableOpacity,
   StyleSheet,
-
+  ScrollView,
+  Dimensions,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { navigate } from "../navigation/NavigationService";
 
+const { height } = Dimensions.get("window");
+import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
-
+ const insets = useSafeAreaInsets();
   return (
-    <SafeAreaView style={styles.container}>
+    <>
+    {/* // <SafeAreaView style={styles.container}> */}
       {/* Top Background Gradient */}
-      <LinearGradient
-          colors={["#eff6ff", "#f0fdf4"]} // from-blue-50 → to-green-50
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
-      style={styles.topBackground}
+      {/* <LinearGradient
+     colors={["red", "red"]}
+        // colors={["#eff6ff", "#f0fdf4"]} // from-blue-50 → to-green-50
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={styles.topBackground}
+      /> */}
+     <SafeAreaProvider>
+
+      {/* <ScrollView contentContainerStyle={styles.container}> */}
+      <ScrollView contentContainerStyle={[styles.container , { paddingBottom: insets.bottom+10  }]}>
+        {/* Content */}
 
 
 
-      />
+<LinearGradient style={styles.header}
+  start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+          colors={["#eff6ff", "#f0fdf4"]}
 
-      {/* Content */}
-      <View style={styles.content}>
-        {/* Logo Section */}
-        <View style={styles.header}>
-          <LinearGradient
-            colors={["#007BFF", "#00C851"]}
-            style={styles.logoContainer}
-          >
-            {/* <Icon name="location-pin" size={28} color="white" /> */}
+        >
+
+
+            <LinearGradient
+              colors={["#007BFF", "#00C851"]}
+              style={styles.logoContainer}
+            />
+            <Text style={styles.title}>SafeTracker</Text>
+            <Text style={styles.subtitle}>
+              Keep your family safe and connected
+            </Text>
+
+
+
           </LinearGradient>
-          <Text style={styles.title}>SafeTracker</Text>
-          <Text style={styles.subtitle}>
-            Keep your family safe and connected
-          </Text>
-        </View>
 
-        {/* Tabs */}
-        <View style={styles.tabContainer}>
-          <TouchableOpacity
-            style={[styles.tab, isLogin && styles.activeTab]}
-            onPress={() => setIsLogin(true)}
-          >
-            <Text style={[styles.tabText, isLogin && styles.activeTabText]}>
-              Login
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.tab, !isLogin && styles.activeTab]}
-            onPress={() => setIsLogin(false)}
-          >
-            <Text style={[styles.tabText, !isLogin && styles.activeTabText]}>
-              Sign Up
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <View style={styles.content}>
+          {/* Logo Section */}
 
-        {/* Form Inputs */}
-        <View style={styles.form}>
-          <View style={styles.inputWrapper}>
-            {/* <Icon name="email" size={20} color="#aaa" /> */}
-            <TextInput
-              style={styles.input}
-              placeholder="Email address"
-              placeholderTextColor="#aaa"
-            />
-          </View>
-          <View style={styles.inputWrapper}>
-            {/* <Icon name="phone" size={20} color="#aaa" /> */}
-            <TextInput
-              style={styles.input}
-              placeholder="Phone number"
-              placeholderTextColor="#aaa"
-            />
-          </View>
-          <View style={styles.inputWrapper}>
-            {/* <Icon name="lock" size={20} color="#aaa" /> */}
-            <TextInput
-              style={styles.input}
-              placeholder="Password"
-              secureTextEntry
-              placeholderTextColor="#aaa"
-            />
+
+          {/* Tabs */}
+          <View style={styles.tabContainer}>
+            <TouchableOpacity
+              style={[styles.tab, isLogin && styles.activeTab]}
+              onPress={() => setIsLogin(true)}
+            >
+              <Text style={[styles.tabText, isLogin && styles.activeTabText]}>
+                Login
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.tab, !isLogin && styles.activeTab]}
+              onPress={() => setIsLogin(false)}
+            >
+              <Text style={[styles.tabText, !isLogin && styles.activeTabText]}>
+                Sign Up
+              </Text>
+            </TouchableOpacity>
           </View>
 
-          {!isLogin && (
+          {/* Form Inputs */}
+          <View style={styles.form}>
             <View style={styles.inputWrapper}>
-              {/* <Icon name="lock" size={20} color="#aaa" /> */}
               <TextInput
                 style={styles.input}
-                placeholder="Confirm password"
+                placeholder="Email address"
+                placeholderTextColor="#aaa"
+              />
+            </View>
+            <View style={styles.inputWrapper}>
+              <TextInput
+                style={styles.input}
+                placeholder="Phone number"
+                placeholderTextColor="#aaa"
+              />
+            </View>
+            <View style={styles.inputWrapper}>
+              <TextInput
+                style={styles.input}
+                placeholder="Password"
                 secureTextEntry
                 placeholderTextColor="#aaa"
               />
             </View>
-          )}
 
-          {/* Gradient Button */}
-          <TouchableOpacity style={{ marginTop: 20 }} onPress={()=>{
-            navigate('role-selector')
-          }} >
-            <LinearGradient
-              colors={["#007BFF", "#00C851"]}
-              style={styles.button}
+            {!isLogin && (
+              <View style={styles.inputWrapper}>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Confirm password"
+                  secureTextEntry
+                  placeholderTextColor="#aaa"
+                />
+              </View>
+            )}
+
+            {/* Gradient Button */}
+            <TouchableOpacity
+              style={{ marginTop: 20 }}
+              onPress={() => {
+                navigate("role-selector");
+              }}
             >
-              <Text style={styles.buttonText}>
-                {isLogin ? "Login" : "Create Account"}
-              </Text>
-            </LinearGradient>
+              <LinearGradient
+                colors={["#007BFF", "#00C851"]}
+                style={styles.button}
+              >
+                <Text style={styles.buttonText}>
+                  {isLogin ? "Login" : "Create Account"}
+                </Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
+
+          {/* Divider */}
+          <View style={styles.dividerContainer}>
+            <View style={styles.divider} />
+            <Text style={styles.dividerText}>or continue with</Text>
+            <View style={styles.divider} />
+          </View>
+
+          {/* Google Button */}
+          <TouchableOpacity style={styles.googleButton}>
+            <Text style={styles.googleButtonText}>Continue with Google</Text>
           </TouchableOpacity>
         </View>
+      </ScrollView>
+      </SafeAreaProvider>
+      {/*  </SafeAreaView> */}
+      </>
 
-        {/* Divider */}
-        <View style={styles.dividerContainer}>
-          <View style={styles.divider} />
-          <Text style={styles.dividerText}>or continue with</Text>
-          <View style={styles.divider} />
-        </View>
-
-        {/* Google Button */}
-        <TouchableOpacity style={styles.googleButton}>
-          {/* <AntDesign name="google" size={20} color="#000" /> */}
-          <Text style={styles.googleButtonText}>Continue with Google</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#F9FAFB",
+    flexGrow: 1,
+    // backgroundColor: "#F9FAFB",
+    backgroundColor:"red"
+  },
 
-  },
-  topBackground: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    height: "29%",
-  },
   content: {
     flex: 1,
     justifyContent: "flex-start",
-    paddingHorizontal: 20,
+    paddingHorizontal: 18,
+    paddingTop:15,
+    // paddingBottom:20,
+    borderWidth:4 ,
+    borderColor:"blue"
+
   },
   header: {
+    paddingTop:30 ,
+    paddingBottom:20,
     alignItems: "center",
-    marginTop: 40,
+     minHeight:height * 0.3,
+    alignItems:"center",
+    justifyContent:"center" ,
+      boxSizing:'border-box'
+
+
   },
   logoContainer: {
     width: 60,
@@ -166,7 +192,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   title: {
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: "700",
     color: "#111",
   },
@@ -178,9 +204,10 @@ const styles = StyleSheet.create({
   },
   tabContainer: {
     flexDirection: "row",
-    marginTop: 30,
     backgroundColor: "#f2f2f2",
     borderRadius: 25,
+    borderWidth :2,
+    borderColor:"yellow",
     padding: 3,
     alignSelf: "center",
   },

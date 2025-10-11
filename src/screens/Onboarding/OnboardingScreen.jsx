@@ -150,6 +150,11 @@ const OnboardingScreen = () => {
             contentContainerStyle={{ flexGrow: 1 }}
             showsVerticalScrollIndicator={false}
           >
+
+ <Text style={[styles.skip]} // safe area ke niche 10 px
+
+    onPress={onFinish}>Skip</Text>
+
             {/* INNER ScrollView → horizontal swipe pages */}
             <ScrollView
               ref={scrollRef}   // 👈 ref attach kiya
@@ -189,5 +194,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 10,
+  },
+
+   skip: {
+
+  fontSize: 16,
+  color: "#007BFF",
+  fontWeight: "600",
+  alignSelf:'flex-end',
+marginRight:10,
+marginTop:10,
+
+
   },
 });
