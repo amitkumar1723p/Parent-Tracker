@@ -9,58 +9,48 @@ import {
   Dimensions,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaProvider, useSafeAreaInsets } from "react-native-safe-area-context";
 import { navigate } from "../navigation/NavigationService";
 
 const { height } = Dimensions.get("window");
-import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
+
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
- const insets = useSafeAreaInsets();
+  const insets = useSafeAreaInsets();
+
   return (
-    <>
-    {/* // <SafeAreaView style={styles.container}> */}
-      {/* Top Background Gradient */}
-      {/* <LinearGradient
-     colors={["red", "red"]}
-        // colors={["#eff6ff", "#f0fdf4"]} // from-blue-50 → to-green-50
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={styles.topBackground}
-      /> */}
-     <SafeAreaProvider>
-
-      {/* <ScrollView contentContainerStyle={styles.container}> */}
-      <ScrollView contentContainerStyle={[styles.container , { paddingBottom: insets.bottom+10  }]}>
-        {/* Content */}
-
-
-
-<LinearGradient style={styles.header}
-  start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
+    <SafeAreaProvider>
+      <ScrollView
+        contentContainerStyle={[
+          styles.container,
+          { paddingBottom: insets.bottom + 20 },
+        ]}
+        showsVerticalScrollIndicator={false}
+      >
+        {/* Header with Gradient */}
+        <LinearGradient
+          style={[
+            styles.header,
+            {
+              paddingTop: insets.top + 40, // responsive top padding (status bar safe)
+            },
+          ]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
           colors={["#eff6ff", "#f0fdf4"]}
-
         >
+          <LinearGradient
+            colors={["#007BFF", "#00C851"]}
+            style={styles.logoContainer}
+          />
+          <Text style={styles.title}>SafeTracker</Text>
+          <Text style={styles.subtitle}>
+            Keep your family safe and connected
+          </Text>
+        </LinearGradient>
 
-
-            <LinearGradient
-              colors={["#007BFF", "#00C851"]}
-              style={styles.logoContainer}
-            />
-            <Text style={styles.title}>SafeTracker</Text>
-            <Text style={styles.subtitle}>
-              Keep your family safe and connected
-            </Text>
-
-
-
-          </LinearGradient>
-
+        {/* Content Section */}
         <View style={styles.content}>
-          {/* Logo Section */}
-
-
           {/* Tabs */}
           <View style={styles.tabContainer}>
             <TouchableOpacity
@@ -120,9 +110,7 @@ export default function Login() {
             {/* Gradient Button */}
             <TouchableOpacity
               style={{ marginTop: 20 }}
-              onPress={() => {
-                navigate("role-selector");
-              }}
+              onPress={() => navigate("role-selector")}
             >
               <LinearGradient
                 colors={["#007BFF", "#00C851"]}
@@ -148,40 +136,20 @@ export default function Login() {
           </TouchableOpacity>
         </View>
       </ScrollView>
-      </SafeAreaProvider>
-      {/*  </SafeAreaView> */}
-      </>
-
+    </SafeAreaProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    // backgroundColor: "#F9FAFB",
-    backgroundColor:"red"
-  },
-
-  content: {
-    flex: 1,
-    justifyContent: "flex-start",
-    paddingHorizontal: 18,
-    paddingTop:15,
-    // paddingBottom:20,
-    borderWidth:4 ,
-    borderColor:"blue"
-
+    backgroundColor: "#F9FAFB",
   },
   header: {
-    paddingTop:30 ,
-    paddingBottom:20,
     alignItems: "center",
-     minHeight:height * 0.3,
-    alignItems:"center",
-    justifyContent:"center" ,
-      boxSizing:'border-box'
-
-
+    justifyContent: "center",
+    paddingBottom: 25,
+    minHeight: 250, // ensures header gradient visible even in split view
   },
   logoContainer: {
     width: 60,
@@ -202,12 +170,16 @@ const styles = StyleSheet.create({
     marginTop: 5,
     textAlign: "center",
   },
+  content: {
+    flex: 1,
+    justifyContent: "flex-start",
+    paddingHorizontal: 20,
+    paddingTop: 20,
+  },
   tabContainer: {
     flexDirection: "row",
     backgroundColor: "#f2f2f2",
     borderRadius: 25,
-    borderWidth :2,
-    borderColor:"yellow",
     padding: 3,
     alignSelf: "center",
   },

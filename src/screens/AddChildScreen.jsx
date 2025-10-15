@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   StyleSheet,
+  ScrollView,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -29,16 +30,18 @@ const AddChildScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['bottom']}>
+
+            <ScrollView  showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingTop:13}}>
       {/* Header */}
-      <View style={styles.header}>
-        {/* <Icon name="arrow-back" size={24} color="#000" /> */}
+      {/* <View style={styles.header}>
+        <Icon name="arrow-back" size={24} color="#000" />
         <Text style={styles.headerTitle}>Add Child</Text>
         <View style={{ flexDirection: "row", gap: 16 }}>
-          {/* <Icon name="notifications-outline" size={24} color="#000" /> */}
-          {/* <Icon name="settings-outline" size={24} color="#000" /> */}
+          <Icon name="notifications-outline" size={24} color="#000" />
+          <Icon name="settings-outline" size={24} color="#000" />
         </View>
-      </View>
+      </View> */}
 
       {/* Top Icon */}
       <View style={styles.topIcon}>
@@ -105,6 +108,11 @@ const AddChildScreen = () => {
           <Text style={styles.buttonText}>Continue</Text>
         </LinearGradient>
       </TouchableOpacity>
+
+</ScrollView>
+
+
+
     </SafeAreaView>
   );
 };

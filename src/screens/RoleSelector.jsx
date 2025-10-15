@@ -173,6 +173,7 @@ navigate('parent-dashboard')
 }
 
 const styles = StyleSheet.create({
+  // safe: { flex: 1, backgroundColor: "#F2F7F7" },
   safe: { flex: 1, backgroundColor: "#F2F7F7" },
   topBackground: {
     position: "absolute",

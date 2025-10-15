@@ -17,32 +17,37 @@ import { navigate,goBack  } from "../navigation/NavigationService";
 export default function ConnectToParentScreen({}) {
   const [code, setCode] = useState("");
 
+
+
+
+
   return (
-    <SafeAreaView style={styles.safe}>
-      {/* Top Bar */}
-      <View style={styles.topBar}>
-        <TouchableOpacity onPress={() => goBack()}>
-          {/* <MaterialIcons name="arrow-back-ios" size={22} color="#222" /> */}
-        </TouchableOpacity>
-        <Text style={styles.topTitle}>Connect to Parent</Text>
-        <View style={styles.topIcons}>
-          <TouchableOpacity style={styles.iconBtn}>
-            {/* <Feather name="help-circle" size={20} color="#444" /> */}
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.iconBtn}>
-            {/* <AntDesign name="qrcode" size={20} color="#444" /> */}
-          </TouchableOpacity>
-        </View>
-      </View>
+    // <SafeAreaView style={styles.safe}>
+    <SafeAreaView style={styles.safe} edges={['bottom']} >
+{/* Top Bar */}
+ <LinearGradient
+
+
+      colors={['#f0fdf4', '#eff6ff']} // from-green-50 → to-blue-50
+      start={{ x: 0, y: 0 }}          // top-left
+      end={{ x: 1, y: 1 }}            // bottom-right
+      style={{flex:1 ,alignItems:'center' , justifyContent:"center"}}
+ >
+
+
+
+
+
+
 
       <ScrollView
-        contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 30 }}
+        contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 30  }}
         showsVerticalScrollIndicator={false}
       >
         {/* Illustration */}
         <View style={styles.illustration}>
           <LinearGradient
-            colors={["#E9F6FF", "#ECFFF7"]}
+            colors={["#e9fbffff", "#ecffefff"]}
             style={styles.illustrationCircle}
           >
             {/* <MaterialIcons name="family-restroom" size={50} color="#00A676" /> */}
@@ -123,34 +128,38 @@ export default function ConnectToParentScreen({}) {
           </View>
         </View>
       </ScrollView>
+
+ </LinearGradient>
+
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: "#F9FAFB" },
+  safe: { flex: 1,   },
 
   /* Top Bar */
-  topBar: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 16,
-    paddingVertical: 14,
-    borderBottomWidth: 1,
-    borderBottomColor: "#eee",
-  },
-  topTitle: { flex: 1, fontSize: 16, fontWeight: "600", color: "#111" },
-  topIcons: { flexDirection: "row" },
-  iconBtn: { marginLeft: 14 },
+  // topBar: {
+  //   flexDirection: "row",
+  //   alignItems: "center",
+  //   paddingHorizontal: 16,
+  //   paddingVertical: 14,
+  //   borderBottomWidth: 1,
+  //   borderBottomColor: "#eee",
+  // },
+  // topTitle: { flex: 1, fontSize: 16, fontWeight: "600", color: "#111" },
+  // topIcons: { flexDirection: "row" },
+  // iconBtn: { marginLeft: 14 },
 
   /* Illustration */
-  illustration: { alignItems: "center", marginTop: 20 },
+  illustration: { alignItems: "center", marginTop: 40  },
   illustrationCircle: {
     width: 90,
     height: 90,
     borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
+    boxShadow:'1'
   },
 
   /* Headings */

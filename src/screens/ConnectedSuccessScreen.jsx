@@ -17,6 +17,17 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function ConnectedSuccessScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.safe}>
+
+
+       <LinearGradient
+
+
+            colors={['#f0fdf4', '#eff6ff']} // from-green-50 → to-blue-50
+            start={{ x: 0, y: 0 }}          // top-left
+            end={{ x: 1, y: 1 }}            // bottom-right
+            style={{flex:1 ,alignItems:'center' , justifyContent:"center"}}
+       >
+
       <ScrollView
         contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 30 }}
         showsVerticalScrollIndicator={false}
@@ -117,6 +128,9 @@ export default function ConnectedSuccessScreen({ navigation }) {
           You can always manage your connection settings in the app profile
         </Text>
       </ScrollView>
+</LinearGradient>
+
+
     </SafeAreaView>
   );
 }

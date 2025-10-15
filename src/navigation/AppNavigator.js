@@ -90,15 +90,42 @@ const AppNavigator = () => {
         <Stack.Screen name="onboarding" component={OnboardingScreen} />
         <Stack.Screen name="login" component={Login} />
         <Stack.Screen name="role-selector" component={RoleSelector} />
-        <Stack.Screen name="child" component={ConnectToParentScreen} />
+        {/* <Stack.Screen name="child" component={ConnectToParentScreen} />
+
+        */}
+
+
+
+
+ {/* Child Connection Screens (Header Show karna hai) */}
+  <Stack.Screen
+    name="child"
+    component={ConnectToParentScreen}
+    options={{
+      headerShown: true,
+      title: 'Connect To Parent', // yahan apna custom name likh
+      headerTitleAlign: 'center',
+    }}
+  />
+
         <Stack.Screen name="parent-child-connect" component={ConnectedSuccessScreen} />
 
         {/* Parent Flow */}
         <Stack.Screen name="parent-dashboard" component={ParentTabs} />
 
         {/* Child Flow */}
-        <Stack.Screen name="child-dashboard" component={ChildTabs} />
-        <Stack.Screen name="add-child-screen" component={AddChildScreen} />
+        <Stack.Screen name="child-dashboard" component={ChildDashboardScreen} />
+        <Stack.Screen name="add-child-screen" component={AddChildScreen}
+
+
+    options={{
+      headerShown: true,
+      title: 'Add Child', // yahan apna custom name likh
+      headerTitleAlign: 'center',
+    }}
+
+
+        />
         <Stack.Screen name="add-invite" component={AddInviteScreen} />
 
       </Stack.Navigator>
