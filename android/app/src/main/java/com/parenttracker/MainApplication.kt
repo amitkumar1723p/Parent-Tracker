@@ -18,6 +18,7 @@ class MainApplication : Application(), ReactApplication {
             PackageList(this).packages.apply {
               // Packages that cannot be autolinked yet can be added manually here, for example:
               // add(MyReactNativePackage())
+
             }
 
         override fun getJSMainModuleName(): String = "index"
@@ -32,7 +33,11 @@ class MainApplication : Application(), ReactApplication {
     get() = getDefaultReactHost(applicationContext, reactNativeHost)
 
   override fun onCreate() {
+
     super.onCreate()
+
+    // ✅ Apply Poppins font globally
+    // PopinFontSetup().applyFont(this)
     loadReactNative(this)
   }
 }

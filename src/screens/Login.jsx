@@ -44,6 +44,17 @@ export default function Login() {
             style={styles.logoContainer}
           />
           <Text style={styles.title}>SafeTracker</Text>
+
+
+
+
+
+{/* fontFamily: 'Poppins-Regular',
+  fontSize: 14,
+  color: '#000000', */}
+           <View>
+    {/* <Text  style={{fontFamily:"Poppins-Bold" ,marginBottom:50}}>hello</Text> */}
+  </View>
           <Text style={styles.subtitle}>
             Keep your family safe and connected
           </Text>
