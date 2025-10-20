@@ -148,13 +148,15 @@ const styles = StyleSheet.create({
   heading: {
     marginTop: 20,
     fontSize: 20,
-    fontWeight: "700",
+    // fontWeight: "700",
+    fontFamily:"Roboto-Bold",
     textAlign: "center",
     color: "#111",
   },
   subheading: {
     marginTop: 8,
     fontSize: 14,
+    fontFamily:"Roboto-Regular",
     color: "#555",
     textAlign: "center",
     lineHeight: 20,
@@ -172,12 +174,12 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     elevation: 3,
   },
-  cardTitle: { fontSize: 14, fontWeight: "700", color: "#111", marginBottom: 12 },
+  cardTitle: { fontSize: 14,  color: "#111", marginBottom: 12 , fontFamily:"Roboto-Bold" },
   parentRow: { flexDirection: "row", alignItems: "center" },
   avatar: { width: 56, height: 56, borderRadius: 14 },
-  parentName: { fontSize: 15, fontWeight: "700", color: "#111" },
-  parentRole: { fontSize: 13, color: "#555", marginTop: 2 },
-  parentStatus: { fontSize: 12, color: "#00C851", marginTop: 4 },
+  parentName: { fontSize: 15,   color: "#111" ,fontFamily:"Roboto-Bold" },
+  parentRole: { fontSize: 13, color: "#555", marginTop: 2  , fontFamily:"Roboto-Regular" },
+  parentStatus: { fontSize: 12, color: "#00C851", marginTop: 4  ,fontFamily:"Roboto-Regular"  },
 
   statsRow: {
     flexDirection: "row",
@@ -185,18 +187,26 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   statBox: { alignItems: "center", flex: 1 },
-  statNumber: { fontSize: 16, fontWeight: "700", color: "#111" },
-  statLabel: { fontSize: 12, color: "#666", marginTop: 2, textAlign: "center" },
+  statNumber: { fontSize: 16,
+
+
+    // fontWeight: "700",
+
+    color: "#111" , fontFamily:"Roboto-Bold"  },
+  statLabel: { fontSize: 12, color: "#666", marginTop: 2, textAlign: "center" , fontFamily:"Roboto-Regular" },
 
   featureRow: { flexDirection: "row", alignItems: "center", marginTop: 12 },
-  featureText: { marginLeft: 10, fontSize: 13, color: "#444", flex: 1 },
+  featureText: { marginLeft: 10, fontSize: 13, color: "#444", flex: 1  , fontFamily:"Roboto-Regular"},
 
   dashboardBtn: {
     paddingVertical: 14,
     borderRadius: 26,
     alignItems: "center",
   },
-  dashboardText: { color: "#fff", fontWeight: "700", fontSize: 15 },
+  dashboardText: { color: "#fff",
+    //  fontWeight: "700",
+
+     fontSize: 15,  fontFamily:"Roboto-Bold" },
 
   footerText: {
     marginTop: 14,
@@ -204,5 +214,6 @@ const styles = StyleSheet.create({
     color: "#666",
     textAlign: "center",
     lineHeight: 18,
+     fontFamily:"Roboto-Regular"
   },
 });

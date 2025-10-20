@@ -10,9 +10,7 @@ import {
 import LinearGradient from "react-native-linear-gradient";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
-//  import banner1 from '../../assets/images/banner-1.jpg'
-//  import banner2 from '../../assets/images/banner-2.jpg'
-//  import banner3 from '../../assets/images/banner-3.jpg'
+
  import banner1 from '../images/banner-1.jpg'
  import banner2 from '../images/banner-2.jpg'
  import banner3 from '../images/banner-3.jpg'
@@ -27,9 +25,7 @@ const { width } = Dimensions.get("window");
   return <>
 
 
-    {/* <Text style={[styles.skip]} // safe area ke niche 10 px
 
-    onPress={onFinish}>Skip</Text> */}
 
 
  <View style={{flex:1 ,  justifyContent:'center' ,alignItems:'center'}}>
@@ -77,9 +73,7 @@ const Onboarding2 =     ({ onNext, onFinish }) =>  {
 
    const insets = useSafeAreaInsets(); // yaha se top padding milega
    return ( < >
-    {/* <Text style={[styles.skip]} // safe area ke niche 10 px
 
-    onPress={onFinish}>Skip</Text> */}
  <View style={{flex:1 , justifyContent:'center' ,alignItems:'center'}}>
  <Image
     //   source={amit} // apna image lagao
@@ -121,9 +115,7 @@ const Onboarding3 = ({ onFinish, onSkip }) =>  {
 
   return (
  <>
-     {/* <Text style={[styles.skip]} // safe area ke niche 10 px
 
-    onPress={onFinish}>Skip</Text> */}
 
  <View style={{flex:1 ,  justifyContent:'center' ,alignItems:'center'}}>
     <Image
@@ -207,16 +199,10 @@ const styles = StyleSheet.create({
     margin: 4,
     width: 8,
   },
-  // skip: {
 
-  // fontSize: 16,
-  // color: "#007BFF",
-  // fontWeight: "600",
-  // alignSelf:'flex-end'
-
-  // },
   subtitle: {
     color: "#555",
+  fontFamily:"Roboto-Regular",
     fontSize: 14,
     marginBottom: 25,
     paddingHorizontal: 15,
@@ -225,7 +211,7 @@ const styles = StyleSheet.create({
   title: {
     color: "#222",
     fontSize: 20,
-    fontWeight: "700",
+     fontFamily:"Roboto-Bold",
     marginBottom: 10,
     textAlign: "center",
   },
@@ -245,6 +231,7 @@ const styles = StyleSheet.create({
      width: width * 0.6,
   },
   buttonText: {
+    fontFamily:"Roboto-Bold",
     color: "#fff",
     fontSize: 16,
     fontWeight: "600",

@@ -9,6 +9,7 @@ import {
   Alert,
   ToastAndroid,
   Linking,
+  ScrollView,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 // import Icon from "react-native-vector-icons/Ionicons";
@@ -61,19 +62,28 @@ const AddInviteScreen = () => {
 
   return (
     <SafeAreaView style={styles.safe}>
+   <ScrollView  showsVerticalScrollIndicator={false}
+    // contentContainerStyle ={{flex:1}}
+
+    >
+
+
+
+
+
       {/* Header */}
-      <View style={styles.header}>
+      {/* <View style={styles.header}>
         <TouchableOpacity onPress={() =>   goBack()}>
-          {/* <Icon name="arrow-back-outline" size={22} color="#222" /> */}
+          <Icon name="arrow-back-outline" size={22} color="#222" />
         </TouchableOpacity>
 
         <Text style={styles.headerTitle}>Add Child</Text>
 
         <View style={styles.headerIcons}>
-          {/* <Icon name="notifications-outline" size={20} color="#222" style={{ marginRight: 12 }} /> */}
-          {/* <Icon name="settings-outline" size={20} color="#222" /> */}
+          <Icon name="notifications-outline" size={20} color="#222" style={{ marginRight: 12 }} />
+          <Icon name="settings-outline" size={20} color="#222" />
         </View>
-      </View>
+      </View> */}
 
       {/* Top icon card */}
       <View style={styles.topIconWrap}>
@@ -105,7 +115,7 @@ const AddInviteScreen = () => {
 
         <View style={styles.qrHolder}>
           <View style={styles.qrBox}>
-            <Text>OrCode</Text>
+            <Text style={{fontFamily:"Roboto-Regular" ,}}>OrCode</Text>
             {/* <QRCode
               value={inviteCode}
               size={120}
@@ -152,6 +162,7 @@ const AddInviteScreen = () => {
           </LinearGradient>
         </TouchableOpacity>
       </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -173,7 +184,8 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 16,
-    fontWeight: "600",
+    // fontWeight: "600",
+    fontFamily:"Roboto-SemiBold" ,
     color: "#222",
   },
   headerIcons: {
@@ -194,7 +206,8 @@ const styles = StyleSheet.create({
   title: {
     textAlign: "center",
     fontSize: 20,
-    fontWeight: "700",
+    // fontWeight: "700",
+    fontFamily:"Roboto-Bold" ,
     marginTop: 12,
     color: "#0B2340",
   },
@@ -204,6 +217,7 @@ const styles = StyleSheet.create({
     marginTop: 6,
     marginBottom: 18,
     fontSize: 13,
+    fontFamily:"Roboto-Regular" ,
   },
   card: {
     backgroundColor: "#fff",
@@ -220,17 +234,22 @@ const styles = StyleSheet.create({
     color: "#9AA3AD",
     fontSize: 13,
     marginBottom: 8,
+    fontFamily:"Roboto-Regular" ,
   },
   smallLabelCenter: {
     textAlign: "center",
     color: "#9AA3AD",
     fontSize: 13,
     marginBottom: 12,
+    fontFamily:"Roboto-Regular" ,
   },
   inviteCode: {
     textAlign: "center",
     fontSize: 28,
-    fontWeight: "800",
+    // fontWeight: "800",
+    fontFamily:"Roboto-Bold" ,
+// fontFamily:"Roboto-ExtraBold" ,
+
     letterSpacing: 1.5,
     color: "#14202B",
     marginBottom: 8,
@@ -240,6 +259,7 @@ const styles = StyleSheet.create({
     color: "#2E6BFF",
     fontSize: 13,
     marginTop: 4,
+    fontFamily:"Roboto-Regular" ,
   },
   qrHolder: {
     alignItems: "center",
@@ -258,7 +278,8 @@ const styles = StyleSheet.create({
   shareLabel: {
     marginTop: 18,
     color: "#334155",
-    fontWeight: "600",
+    // fontWeight: "600",
+    fontFamily:"Roboto-SemiBold" ,
     marginBottom: 10,
   },
   shareRow: {
@@ -296,6 +317,8 @@ const styles = StyleSheet.create({
   shareText: {
     fontSize: 12,
     color: "#334155",
+fontFamily:"Roboto-Regular" ,
+
   },
   bottomWrap: {
     marginTop: "auto",
@@ -309,7 +332,8 @@ const styles = StyleSheet.create({
   },
   doneText: {
     color: "#fff",
-    fontWeight: "700",
+    // fontWeight: "700",
     fontSize: 16,
+    fontFamily:"Roboto-Bold" ,
   },
 });

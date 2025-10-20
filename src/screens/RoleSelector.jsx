@@ -200,11 +200,12 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontSize: 20,
-    fontWeight: "700",
+    fontFamily:"Roboto-Bold",
     color: "#0B1220",
   },
   subheading: {
     fontSize: 13,
+    fontFamily:"Roboto-Regular" ,
     color: "#5B6B73",
     textAlign: "center",
     marginTop: 6,
@@ -261,13 +262,16 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 15,
     color: "#0B1220",
-    fontWeight: "700",
+
+    // fontWeight: "700",
+     fontFamily:"Roboto-Bold"
   },
   cardDesc: {
     marginTop: 6,
     fontSize: 12,
     color: "#58646C",
     lineHeight: 17,
+     fontFamily:"Roboto-Regular"
   },
   checkWrap: {
     width: 36,
@@ -303,8 +307,8 @@ const styles = StyleSheet.create({
   featuresTitle: {
     fontSize: 14,
     color: "#112233",
-    fontWeight: "700",
     marginBottom: 10,
+    fontFamily:"Roboto-Bold"
   },
   featureRow: {
     flexDirection: "row",
@@ -319,6 +323,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 13,
     color: "#51616A",
+    fontFamily:"Roboto-Regular"
   },
 
   continueBtn: {
@@ -328,7 +333,9 @@ const styles = StyleSheet.create({
   },
   continueText: {
     color: "#fff",
-    fontWeight: "700",
+    // fontWeight: "700",
+     fontFamily:"Roboto-Bold",
     fontSize: 16,
+     fontFamily:"Roboto-Regular"
   },
 });

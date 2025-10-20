@@ -28,7 +28,14 @@ function ParentTabs() {
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarShowLabel: true,
-        tabBarStyle: { backgroundColor: "#fff", height: 60 },
+        tabBarStyle: { backgroundColor: "#fff" },
+
+tabBarLabelStyle: {
+      fontFamily: 'Roboto-Regular', // 👈 yahan font lagana hai
+      fontSize: 12,
+      color: '#000', // optional, agar chaahe toh
+    },
+
         tabBarIcon: ({ focused, color }) => {
           let iconName;
           if (route.name === "Home") iconName = focused ? "home" : "home-outline";
@@ -105,6 +112,12 @@ const AppNavigator = () => {
       headerShown: true,
       title: 'Connect To Parent', // yahan apna custom name likh
       headerTitleAlign: 'center',
+
+       headerTitleStyle: {
+      fontFamily: 'Roboto-Regular', // 👈 yahan font apply kiya
+      fontSize: 18,                 // optional (custom size)
+      color: '#000',                // optional (custom color)
+    },
     }}
   />
 
@@ -122,6 +135,12 @@ const AppNavigator = () => {
       headerShown: true,
       title: 'Add Child', // yahan apna custom name likh
       headerTitleAlign: 'center',
+          headerTitleStyle: {
+      fontFamily: 'Roboto-Regular', // 👈 yahan font apply kiya
+      fontSize: 18,                 // optional (custom size)
+      color: '#000',                // optional (custom color)
+    },
+
     }}
 
 

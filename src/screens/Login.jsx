@@ -9,7 +9,7 @@ import {
   Dimensions,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import { SafeAreaProvider, useSafeAreaInsets } from "react-native-safe-area-context";
+import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 import { navigate } from "../navigation/NavigationService";
 
 const { height } = Dimensions.get("window");
@@ -20,9 +20,10 @@ export default function Login() {
 
   return (
     <SafeAreaProvider>
+      <SafeAreaView  style={styles.container}>
       <ScrollView
         contentContainerStyle={[
-          styles.container,
+
           { paddingBottom: insets.bottom + 20 },
         ]}
         showsVerticalScrollIndicator={false}
@@ -31,9 +32,9 @@ export default function Login() {
         <LinearGradient
           style={[
             styles.header,
-            {
-              paddingTop: insets.top + 40, // responsive top padding (status bar safe)
-            },
+            // {
+            //   paddingTop: insets.top + 40, // responsive top padding (status bar safe)
+            // },
           ]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
@@ -147,6 +148,7 @@ export default function Login() {
           </TouchableOpacity>
         </View>
       </ScrollView>
+      </SafeAreaView>
     </SafeAreaProvider>
   );
 }
@@ -171,11 +173,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   title: {
+     fontFamily:"Roboto-Bold" ,
     fontSize: 24,
-    fontWeight: "700",
+    // fontWeight: "700",
     color: "#111",
   },
   subtitle: {
+    fontFamily:"Roboto-Regular",
     fontSize: 13,
     color: "#555",
     marginTop: 5,
@@ -206,8 +210,9 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   tabText: {
+    fontFamily:"Roboto-SemiBold",
     fontSize: 14,
-    fontWeight: "600",
+    // fontWeight: "600",
     color: "#555",
   },
   activeTabText: {
@@ -232,6 +237,10 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     marginLeft: 10,
     color: "#111",
+
+
+  fontFamily:"Roboto-Regular"
+
   },
   button: {
     paddingVertical: 14,
@@ -240,7 +249,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#fff",
-    fontWeight: "600",
+    fontFamily:"Roboto-SemiBold" ,
     fontSize: 16,
   },
   dividerContainer: {
@@ -256,6 +265,7 @@ const styles = StyleSheet.create({
   dividerText: {
     marginHorizontal: 10,
     fontSize: 12,
+    fontFamily:"Roboto-Regular",
     color: "#888",
   },
   googleButton: {
@@ -272,7 +282,8 @@ const styles = StyleSheet.create({
   googleButtonText: {
     marginLeft: 10,
     fontSize: 14,
-    fontWeight: "600",
+    fontFamily:"Roboto-SemiBold" ,
+    // fontWeight: "600",
     color: "#111",
   },
 });

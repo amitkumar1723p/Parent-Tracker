@@ -23,7 +23,7 @@ export default function ConnectToParentScreen({}) {
 
   return (
     // <SafeAreaView style={styles.safe}>
-    <SafeAreaView style={styles.safe} edges={['bottom']} >
+    <SafeAreaView style={styles.safe} edges={['bottom' ,"right" ,"left"]} >
 {/* Top Bar */}
  <LinearGradient
 
@@ -60,6 +60,8 @@ export default function ConnectToParentScreen({}) {
           Enter the invite code or scan the QR code shared by your parent to
           connect safely
         </Text>
+
+
 
         {/* Invite Code Card */}
         <View style={styles.card}>
@@ -166,13 +168,15 @@ const styles = StyleSheet.create({
   heading: {
     marginTop: 18,
     fontSize: 18,
-    fontWeight: "700",
+
+  fontFamily:"Roboto-Bold" ,
     textAlign: "center",
     color: "#111",
   },
   subheading: {
     marginTop: 6,
     fontSize: 13,
+    fontFamily:"Roboto-Regular",
     textAlign: "center",
     color: "#555",
     lineHeight: 18,
@@ -191,7 +195,7 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     elevation: 3,
   },
-  cardLabel: { fontSize: 13, color: "#333", marginBottom: 8 },
+  cardLabel: { fontSize: 13, color: "#333", marginBottom: 8 ,fontFamily:"Roboto-Regular" },
   input: {
     borderWidth: 1,
     borderColor: "#ddd",
@@ -200,14 +204,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     fontSize: 14,
     color: "#111",
+     fontFamily:"Roboto-Regular"
   },
-  inputHint: { fontSize: 11, color: "#777", marginTop: 6 },
+  inputHint: { fontSize: 11, color: "#777", marginTop: 6 ,fontFamily:"Roboto-Regular" },
   connectBtn: {
     borderRadius: 25,
     paddingVertical: 13,
     alignItems: "center",
   },
-  connectText: { color: "#fff", fontWeight: "600", fontSize: 15 },
+  connectText: { color: "#fff",   fontSize: 15  , fontFamily:"Roboto-SemiBold"},
 
   /* Divider */
   dividerWrap: {
@@ -217,7 +222,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   divider: { flex: 1, height: 1, backgroundColor: "#eee" },
-  dividerText: { marginHorizontal: 10, fontSize: 12, color: "#888" },
+  dividerText: { marginHorizontal: 10, fontSize: 12, color: "#888" ,  fontFamily:"Roboto-Regular"},
 
   /* QR Section */
   qrIconWrap: {
@@ -232,9 +237,12 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     fontSize: 15,
-    fontWeight: "600",
+    // fontWeight: "600",
     color: "#111",
     textAlign: "center",
+    fontFamily:"Roboto-SemiBold"
+
+
   },
   cardDesc: {
     marginTop: 6,
@@ -242,6 +250,7 @@ const styles = StyleSheet.create({
     color: "#555",
     textAlign: "center",
     lineHeight: 18,
+     fontFamily:"Roboto-Regular"
   },
   qrBtn: {
     flexDirection: "row",
@@ -251,7 +260,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 18,
     paddingVertical: 10,
   },
-  qrBtnText: { marginLeft: 8, fontSize: 13, fontWeight: "600", color: "#111" },
+  qrBtnText: { marginLeft: 8, fontSize: 13,
+
+    // fontWeight: "600",
+
+    color: "#111", fontFamily:"Roboto-SemiBold" },
 
   /* Help */
   helpBox: {
@@ -261,6 +274,8 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 12,
   },
-  helpTitle: { fontSize: 13, fontWeight: "700", color: "#007BFF" },
-  helpText: { fontSize: 12, color: "#444", marginTop: 2, lineHeight: 17 },
+  helpTitle: { fontSize: 13,
+    //  fontWeight: "700",
+      color: "#007BFF"  , fontFamily:"Roboto-Bold" },
+  helpText: { fontSize: 12, color: "#444", marginTop: 2, lineHeight: 17  ,fontFamily:"Roboto-Regular"},
 });

@@ -30,18 +30,11 @@ const AddChildScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={['bottom']}>
+    <SafeAreaView style={styles.container} edges={['bottom' ,"right" ,"left"]}>
 
             <ScrollView  showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingTop:13}}>
       {/* Header */}
-      {/* <View style={styles.header}>
-        <Icon name="arrow-back" size={24} color="#000" />
-        <Text style={styles.headerTitle}>Add Child</Text>
-        <View style={{ flexDirection: "row", gap: 16 }}>
-          <Icon name="notifications-outline" size={24} color="#000" />
-          <Icon name="settings-outline" size={24} color="#000" />
-        </View>
-      </View> */}
+
 
       {/* Top Icon */}
       <View style={styles.topIcon}>
@@ -49,7 +42,7 @@ const AddChildScreen = () => {
       </View>
 
       {/* Title */}
-      <Text style={styles.title}>Add Your Child</Text>
+      <Text style={styles.title}>Add Your Child  </Text>
       <Text style={styles.subtitle}>
         Enter your child's details to get started
       </Text>
@@ -124,6 +117,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F9FAFB", // light background like screenshot
     paddingHorizontal: 20,
+
   },
   header: {
     flexDirection: "row",
@@ -131,11 +125,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingVertical: 12,
   },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: "600",
-    color: "#000",
-  },
+
   topIcon: {
     alignSelf: "center",
     marginVertical: 20,
@@ -148,15 +138,18 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 22,
-    fontWeight: "700",
+    // fontWeight: "700",
     textAlign: "center",
     marginBottom: 6,
+    fontFamily:"Roboto-Bold" ,
+
   },
   subtitle: {
     fontSize: 14,
     color: "#777",
     textAlign: "center",
     marginBottom: 20,
+fontFamily:"Roboto-Regular" ,
   },
   form: {
     marginTop: 10,
@@ -166,9 +159,10 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 14,
-    fontWeight: "500",
+    // fontWeight: "500",
     color: "#333",
     marginBottom: 6,
+    fontFamily:"Roboto-SemiBold" ,
   },
   inputWrapper: {
      flexDirection: "row",
@@ -185,11 +179,13 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
      marginLeft: 8,
     fontSize: 16,
+    fontFamily:"Roboto-Regular" ,
   },
     photoLabel: {
     fontSize: 14,
     color: "#444",
     marginBottom: 10,
+    fontFamily:"Roboto-Regular" ,
   },
   photoRow: {
     flexDirection: "row",
@@ -216,7 +212,8 @@ const styles = StyleSheet.create({
   photoButtonText: {
     fontSize: 14,
     color: "#007BFF",
-    fontWeight: "600",
+    // fontWeight: "600",
+    fontFamily:"Roboto-SemiBold" ,
   },
   buttonWrapper: {
     marginTop: "auto",
@@ -230,7 +227,9 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
-    fontWeight: "700",
+    // fontWeight: "700",
+
     color: "#fff",
+    fontFamily:"Roboto-Bold" ,
   },
 });

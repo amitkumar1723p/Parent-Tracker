@@ -77,7 +77,11 @@ export default function ChildDashboardScreen() {
             <View style={styles.locationStatus}>
               <Text style={styles.statusDot}>●</Text>
               <Text style={styles.statusText}>
-                Currently at: <Text style={{ fontWeight: "700" }}>Home</Text>
+                Currently at: <Text style={{
+
+                  // fontWeight: "700"
+
+                    fontFamily:"Roboto-Bold"}}>Home</Text>
               </Text>
             </View>
           )}
@@ -186,8 +190,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 16,
   },
-  greeting: { fontSize: 18, fontWeight: "700", color: "#111" },
-  subtitle: { fontSize: 13, color: "#666", marginTop: 4 },
+  greeting: { fontSize: 18,
+
+    // fontWeight: "700",
+
+    color: "#111"  , fontFamily:"Roboto-Bold" },
+  subtitle: { fontSize: 13, color: "#666", marginTop: 4  , fontFamily:"Roboto-Regular"},
   avatar: { width: 44, height: 44, borderRadius: 22 },
 
   /* Card */
@@ -202,8 +210,12 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     elevation: 3,
   },
-  cardTitle: { fontSize: 15, fontWeight: "700", color: "#111" },
-  cardDesc: { fontSize: 13, color: "#666", marginTop: 6, lineHeight: 18 },
+  cardTitle: { fontSize: 15,
+
+    // fontWeight: "700",
+
+    color: "#111" ,fontFamily:"Roboto-Bold" },
+  cardDesc: { fontSize: 13, color: "#666", marginTop: 6, lineHeight: 18  , fontFamily:"Roboto-Regular" },
 
   /* Location Sharing */
   locationStatus: {
@@ -214,8 +226,8 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
   },
-  statusDot: { fontSize: 16, color: "#28A745", marginRight: 6 },
-  statusText: { fontSize: 13, color: "#111" },
+  statusDot: { fontSize: 16, color: "#28A745", marginRight: 6 , fontFamily:"Roboto-Regular" },
+  statusText: { fontSize: 13, color: "#111" , fontFamily:"Roboto-Regular" },
 
   /* Emergency Help */
   sosButton: {
@@ -233,9 +245,14 @@ const styles = StyleSheet.create({
   /* Connected Parent */
   parentRow: { flexDirection: "row", alignItems: "center" },
   parentAvatar: { width: 56, height: 56, borderRadius: 14 },
-  parentName: { fontSize: 15, fontWeight: "700", color: "#111" },
-  parentRole: { fontSize: 13, color: "#555", marginTop: 2 },
-  connected: { fontSize: 12, color: "#28A745", marginTop: 4 },
+  parentName: { fontSize: 15,
+
+
+    // fontWeight: "700",
+
+    color: "#111" ,  fontFamily:"Roboto-Bold"},
+  parentRole: { fontSize: 13, color: "#555", marginTop: 2 , fontFamily:"Roboto-Regular" },
+  connected: { fontSize: 12, color: "#28A745", marginTop: 4 ,   fontFamily:"Roboto-Regular" },
   protectedBadge: {
     flexDirection: "row",
     backgroundColor: "#E8F8F1",
@@ -247,13 +264,14 @@ const styles = StyleSheet.create({
   protectedText: {
     marginLeft: 6,
     fontSize: 12,
-    fontWeight: "600",
+    // fontWeight: "600",
     color: "#28A745",
+    fontFamily:"Roboto-SemiBold"
   },
 
   /* Safety Tips */
   tipRow: { flexDirection: "row", alignItems: "center", marginTop: 12 },
-  tipText: { marginLeft: 10, fontSize: 13, color: "#444", flex: 1 },
+  tipText: { marginLeft: 10, fontSize: 13, color: "#444", flex: 1  ,  fontFamily:"Roboto-Regular"  },
 
   /* Battery */
   batteryRow: {
@@ -262,9 +280,13 @@ const styles = StyleSheet.create({
     marginTop: 10,
     justifyContent: "space-between",
   },
-  batteryPercent: { fontSize: 20, fontWeight: "700", color: "#111" },
-  batteryStatus: { fontSize: 13, color: "#28A745" },
-  locationActive: { fontSize: 13, color: "#28A745", marginLeft: 6 },
+  batteryPercent: { fontSize: 20,
+
+
+    // fontWeight: "700",
+    color: "#111"  ,  fontFamily:"Roboto-Regular" },
+  batteryStatus: { fontSize: 13, color: "#28A745"   ,  fontFamily:"Roboto-Regular"},
+  locationActive: { fontSize: 13, color: "#28A745", marginLeft: 6  ,  fontFamily:"Roboto-Regular"},
 });
 
 
