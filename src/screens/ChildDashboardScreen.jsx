@@ -11,9 +11,9 @@ import {
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";
-// import Feather from "react-native-vector-icons/Feather";
-// import AntDesign from "react-native-vector-icons/AntDesign";
-// import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import Feather from "react-native-vector-icons/Feather";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 export default function ChildDashboardScreen() {
   const [locationSharing, setLocationSharing] = useState(true);
@@ -54,12 +54,12 @@ export default function ChildDashboardScreen() {
 
         {/* Location Sharing */}
         <View style={styles.card}>
-          {/* <Feather
+          <Feather
             name="map-pin"
             size={32}
             color="#28A745"
             style={{ alignSelf: "center", marginBottom: 10 }}
-          /> */}
+          />
           <Text style={styles.cardTitle}>Location Sharing</Text>
           <Text style={styles.cardDesc}>
             Your parents can see where you are and keep you safe
@@ -95,7 +95,7 @@ export default function ChildDashboardScreen() {
             be notified immediately.
           </Text>
           <TouchableOpacity activeOpacity={0.9} style={styles.sosButton}>
-            {/* <MaterialIcons name="sos" size={40} color="#fff" /> */}
+            <MaterialIcons name="sos" size={40} color="#fff" />
           </TouchableOpacity>
         </View>
 
@@ -115,7 +115,7 @@ export default function ChildDashboardScreen() {
               <Text style={styles.connected}>● Connected</Text>
             </View>
             <View style={styles.protectedBadge}>
-              {/* <Feather name="shield" size={16} color="#28A745" /> */}
+              <Feather name="shield" size={16} color="#28A745" />
               <Text style={styles.protectedText}>Protected</Text>
             </View>
           </View>
@@ -126,21 +126,21 @@ export default function ChildDashboardScreen() {
           <Text style={styles.cardTitle}>Safety Tips 💡</Text>
 
           <View style={styles.tipRow}>
-            {/* <Feather name="navigation" size={18} color="#007BFF" /> */}
+            <Feather name="navigation" size={18} color="#007BFF" />
             <Text style={styles.tipText}>
               Always tell your parents where you’re going
             </Text>
           </View>
 
           <View style={styles.tipRow}>
-            {/* <AntDesign name="enviromento" size={18} color="#28A745" /> */}
+            <AntDesign name="enviromento" size={18} color="#28A745" />
             <Text style={styles.tipText}>
               Stay in safe areas that your parents know about
             </Text>
           </View>
 
           <View style={styles.tipRow}>
-            {/* <MaterialIcons name="sos" size={18} color="#FF4444" /> */}
+            <MaterialIcons name="sos" size={18} color="#FF4444" />
             <Text style={styles.tipText}>
               Use the SOS button if you ever feel scared or need help
             </Text>
@@ -160,7 +160,7 @@ export default function ChildDashboardScreen() {
           </View>
 
           <View style={styles.batteryRow}>
-            {/* <Feather name="map" size={16} color="#28A745" /> */}
+            <Feather name="map" size={16} color="#28A745" />
             <Text style={styles.locationActive}>Location Services Active</Text>
           </View>
         </View>

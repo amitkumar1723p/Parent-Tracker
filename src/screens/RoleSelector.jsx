@@ -11,9 +11,9 @@ import {
 import LinearGradient from "react-native-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { navigate } from "../navigation/NavigationService";
-// import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-// import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-// import AntDesign from "react-native-vector-icons/AntDesign";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import AntDesign from "react-native-vector-icons/AntDesign";
 
 const FEATURES = {
   parent: [
@@ -69,7 +69,7 @@ navigate('parent-dashboard')
             colors={["#7CCBFF", "#6EE2A4"]}
             style={styles.avatarInner}
           >
-            {/* <MaterialCommunityIcons name={avatarIcon} size={26} color="#fff" /> */}
+            <MaterialCommunityIcons name={avatarIcon} size={26} color="#fff" />
           </LinearGradient>
         </LinearGradient>
 
@@ -83,7 +83,7 @@ navigate('parent-dashboard')
         <View style={styles.checkWrap}>
           {isSelected ? (
             <View style={[styles.checkCircle, { backgroundColor: highlightColor }]}>
-              {/* <AntDesign name="check" size={14} color="#fff" /> */}
+              <AntDesign name="check" size={14} color="#fff" />
             </View>
           ) : (
             <View style={styles.emptyDot} />
@@ -105,7 +105,7 @@ navigate('parent-dashboard')
         {/* Header (logo + title + subtitle) - placed above white card area */}
         <View style={styles.header}>
           <LinearGradient colors={["#7CCBFF", "#6EE2A4"]} style={styles.logo}>
-            {/* <MaterialCommunityIcons name="map-marker" size={28} color="#fff" /> */}
+            <MaterialCommunityIcons name="map-marker" size={28} color="#fff" />
           </LinearGradient>
           <Text style={styles.heading}>Choose Your Role</Text>
           <Text style={styles.subheading}>
@@ -141,7 +141,8 @@ navigate('parent-dashboard')
               {FEATURES[selectedRole].map((f, i) => (
                 <View key={i} style={styles.featureRow}>
                   <View style={styles.featureIconWrap}>
-                    {/* <MaterialIcons name={f.icon} size={18} color={selectedRole === "parent" ? "#4A90FF" : "#00C851"} /> */}
+
+                    <MaterialIcons name={f.icon} size={18} color={selectedRole === "parent" ? "#4A90FF" : "#00C851"} />
                   </View>
                   <Text style={styles.featureText}>{f.text}</Text>
                 </View>

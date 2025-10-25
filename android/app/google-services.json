@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "243310166105",
+    "project_id": "parent-tracker-758a2",
+    "storage_bucket": "parent-tracker-758a2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:243310166105:android:48f805c52ebfd28c94f148",
+        "android_client_info": {
+          "package_name": "com.parenttracker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKWxb_OL_L3Isc-g13RJ1U2V9U6U9Zz-M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

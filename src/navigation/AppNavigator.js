@@ -6,7 +6,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
  import { navigationRef, safeReplace } from './NavigationService';
-// import Ionicons from "react-native-vector-icons/Ionicons";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 // Screens
 import OnboardingScreen from "../screens/Onboarding/OnboardingScreen";
@@ -43,7 +43,7 @@ tabBarLabelStyle: {
           else if (route.name === "Geofencing") iconName = focused ? "map" : "map-outline";
           else if (route.name === "Summary") iconName = focused ? "stats-chart" : "stats-chart-outline";
 
-          // return <Ionicons name={iconName} size={22} color={color} />;
+          return <Ionicons name={iconName} size={22} color={color} />;
         },
         tabBarActiveTintColor: "#007BFF",
         tabBarInactiveTintColor: "#888",
@@ -72,7 +72,7 @@ function ChildTabs() {
           else if (route.name === "Battery") iconName = focused ? "battery-full" : "battery-half-outline";
           else if (route.name === "Settings") iconName = focused ? "settings" : "settings-outline";
 
-          // return <Ionicons name={iconName} size={22} color={color} />;
+          return <Ionicons name={iconName} size={22} color={color} />;
         },
         tabBarActiveTintColor: "#007BFF",
         tabBarInactiveTintColor: "#888",

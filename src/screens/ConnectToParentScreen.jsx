@@ -10,9 +10,9 @@ import {
 import LinearGradient from "react-native-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { navigate,goBack  } from "../navigation/NavigationService";
-// import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-// import AntDesign from "react-native-vector-icons/AntDesign";
-// import Feather from "react-native-vector-icons/Feather";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import Feather from "react-native-vector-icons/Feather";
 
 export default function ConnectToParentScreen({}) {
   const [code, setCode] = useState("");
@@ -50,7 +50,7 @@ export default function ConnectToParentScreen({}) {
             colors={["#e9fbffff", "#ecffefff"]}
             style={styles.illustrationCircle}
           >
-            {/* <MaterialIcons name="family-restroom" size={50} color="#00A676" /> */}
+            <MaterialIcons name="family-restroom" size={50} color="#00A676" />
           </LinearGradient>
         </View>
 
@@ -99,7 +99,7 @@ export default function ConnectToParentScreen({}) {
         {/* QR Code Card */}
         <View style={styles.card}>
           <View style={styles.qrIconWrap}>
-            {/* <AntDesign name="qrcode" size={28} color="#4A90FF" /> */}
+            <AntDesign name="qrcode" size={28} color="#4A90FF" />
           </View>
           <Text style={styles.cardTitle}>Scan QR Code</Text>
           <Text style={styles.cardDesc}>
@@ -112,7 +112,7 @@ export default function ConnectToParentScreen({}) {
             style={{ marginTop: 14, alignSelf: "center" }}
           >
             <View style={styles.qrBtn}>
-              {/* <Feather name="camera" size={18} color="#222" /> */}
+              <Feather name="camera" size={18} color="#222" />
               <Text style={styles.qrBtnText}>Open Camera Scanner</Text>
             </View>
           </TouchableOpacity>

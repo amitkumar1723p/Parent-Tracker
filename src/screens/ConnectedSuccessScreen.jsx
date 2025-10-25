@@ -9,9 +9,9 @@ import {
   ScrollView,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-// import AntDesign from "react-native-vector-icons/AntDesign";
-// import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-// import Feather from "react-native-vector-icons/Feather";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import Feather from "react-native-vector-icons/Feather";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ConnectedSuccessScreen({ navigation }) {
@@ -38,7 +38,7 @@ export default function ConnectedSuccessScreen({ navigation }) {
             colors={["#E5F9F0", "#E7F4FF"]}
             style={styles.checkCircle}
           >
-            {/* <AntDesign name="checkcircle" size={64} color="#28A745" /> */}
+            <AntDesign name="checkcircle" size={64} color="#28A745" />
           </LinearGradient>
         </View>
 
@@ -90,7 +90,7 @@ export default function ConnectedSuccessScreen({ navigation }) {
           </View>
 
           <View style={styles.featureRow}>
-            {/* <AntDesign name="enviromento" size={18} color="#00C851" /> */}
+            <AntDesign name="enviromento" size={18} color="#00C851" />
             <Text style={styles.featureText}>
               Safe zones are automatically set
             </Text>

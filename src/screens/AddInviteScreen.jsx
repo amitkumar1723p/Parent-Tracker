@@ -12,7 +12,7 @@ import {
   ScrollView,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-// import Icon from "react-native-vector-icons/Ionicons";
+import Icon from "react-native-vector-icons/Ionicons";
 // import Clipboard from "@react-native-clipboard/clipboard";
 // import QRCode from "react-native-qrcode-svg";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -72,23 +72,16 @@ const AddInviteScreen = () => {
 
 
       {/* Header */}
-      {/* <View style={styles.header}>
-        <TouchableOpacity onPress={() =>   goBack()}>
-          <Icon name="arrow-back-outline" size={22} color="#222" />
-        </TouchableOpacity>
 
-        <Text style={styles.headerTitle}>Add Child</Text>
 
-        <View style={styles.headerIcons}>
-          <Icon name="notifications-outline" size={20} color="#222" style={{ marginRight: 12 }} />
-          <Icon name="settings-outline" size={20} color="#222" />
-        </View>
-      </View> */}
+
+
+
 
       {/* Top icon card */}
       <View style={styles.topIconWrap}>
         <LinearGradient colors={["#EAF8FF", "#E9FBEF"]} style={styles.topIcon}>
-          {/* <Icon name="qr-code-outline" size={28} color="#0DA47A" /> */}
+          <Icon name="qr-code-outline" size={28} color="#0DA47A" />
         </LinearGradient>
       </View>
 
@@ -128,27 +121,37 @@ const AddInviteScreen = () => {
       {/* Share options */}
       <Text style={styles.shareLabel}>Share via:</Text>
       <View style={styles.shareRow}>
-        <TouchableOpacity style={styles.shareItem} onPress={handleSms}>
+        <TouchableOpacity style={styles.shareItem}
+        //  onPress={handleSms}
+         >
           <View style={styles.iconCircle}>
-            {/* <Icon name="chatbubble-outline" size={20} color="#1AA67A" /> */}
+            <Icon name="chatbubble-outline" size={20} color="#1AA67A" />
           </View>
           <Text style={styles.shareText}>Text{"\n"}Message</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.shareItem} onPress={() => copyToClipboard(inviteCode)}>
+        <TouchableOpacity style={styles.shareItem}
+          //  onPress={() => copyToClipboard(inviteCode)}
+
+           >
           <View style={styles.iconCircle}>
-            {/* <Icon name="copy-outline" size={20} color="#6D9CFF" /> */}
+            <Icon name="copy-outline" size={20} color="#6D9CFF" />
           </View>
           <Text style={styles.shareText}>Copy{"\n"}Code</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.shareItem} onPress={() => {
-          // fallback share (clipboard + toast)
-          copyToClipboard(inviteCode);
-          showToast("Invite code copied — paste anywhere");
-        }}>
+        <TouchableOpacity style={styles.shareItem}
+
+        // onPress={() => {
+        //   // fallback share (clipboard + toast)
+        //   copyToClipboard(inviteCode);
+        //   showToast("Invite code copied — paste anywhere");
+        // }}
+
+
+        >
           <View style={styles.iconCircle}>
-            {/* <Icon name="share-social-outline" size={20} color="#FF9AA2" /> */}
+            <Icon name="share-social-outline" size={20} color="#FF9AA2" />
           </View>
           <Text style={styles.shareText}>More</Text>
         </TouchableOpacity>
@@ -321,7 +324,7 @@ fontFamily:"Roboto-Regular" ,
 
   },
   bottomWrap: {
-    marginTop: "auto",
+    marginTop: 19,
     marginBottom: 18,
   },
   doneButton: {

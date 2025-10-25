@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -7,16 +7,45 @@ import {
   StyleSheet,
   ScrollView,
   Dimensions,
+  Alert,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 import { navigate } from "../navigation/NavigationService";
-
+import Icon from "react-native-vector-icons/MaterialIcons";
 const { height } = Dimensions.get("window");
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
   const insets = useSafeAreaInsets();
+
+
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId: '243310166105-39bjnquqcdi7ccccfi1b3ll2bkta8los.apps.googleusercontent.com', // ✅ yahi copy wali ID lagani hai
+      offlineAccess: true, // optional (agar refresh token chahiye)
+    });
+
+  }, [])
+
+  // handle continue  with google
+
+
+   const continueWithGoogle = async () =>{
+
+  try {
+      await GoogleSignin.signOut(); // ✅ purana session clear
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      console.log('✅ Google User Info:', userInfo);
+
+
+      // TODO: yahan tu apne Node.js backend ko token bhej sakta hai
+    } catch (error) {
+      console.log('❌ Google Signin Error:', error);
+    }
+   }
 
   return (
     <SafeAreaProvider>
@@ -40,21 +69,28 @@ export default function Login() {
           end={{ x: 1, y: 1 }}
           colors={["#eff6ff", "#f0fdf4"]}
         >
+
+
+
+
+
           <LinearGradient
             colors={["#007BFF", "#00C851"]}
             style={styles.logoContainer}
-          />
+          >
+        <Icon name="location-pin" size={28} color="white" />
+          </LinearGradient>
+
+
           <Text style={styles.title}>SafeTracker</Text>
 
 
 
 
 
-{/* fontFamily: 'Poppins-Regular',
-  fontSize: 14,
-  color: '#000000', */}
+
            <View>
-    {/* <Text  style={{fontFamily:"Poppins-Bold" ,marginBottom:50}}>hello</Text> */}
+
   </View>
           <Text style={styles.subtitle}>
             Keep your family safe and connected
@@ -86,6 +122,7 @@ export default function Login() {
           {/* Form Inputs */}
           <View style={styles.form}>
             <View style={styles.inputWrapper}>
+                      <Icon name="email" size={20} color="#aaa" />
               <TextInput
                 style={styles.input}
                 placeholder="Email address"
@@ -93,6 +130,7 @@ export default function Login() {
               />
             </View>
             <View style={styles.inputWrapper}>
+               <Icon name="phone" size={20} color="#aaa" />
               <TextInput
                 style={styles.input}
                 placeholder="Phone number"
@@ -100,6 +138,7 @@ export default function Login() {
               />
             </View>
             <View style={styles.inputWrapper}>
+               <Icon name="lock" size={20} color="#aaa" />
               <TextInput
                 style={styles.input}
                 placeholder="Password"
@@ -110,6 +149,7 @@ export default function Login() {
 
             {!isLogin && (
               <View style={styles.inputWrapper}>
+                 <Icon name="lock" size={20} color="#aaa" />
                 <TextInput
                   style={styles.input}
                   placeholder="Confirm password"
@@ -143,7 +183,7 @@ export default function Login() {
           </View>
 
           {/* Google Button */}
-          <TouchableOpacity style={styles.googleButton}>
+          <TouchableOpacity style={styles.googleButton}  onPress={continueWithGoogle}>
             <Text style={styles.googleButtonText}>Continue with Google</Text>
           </TouchableOpacity>
         </View>

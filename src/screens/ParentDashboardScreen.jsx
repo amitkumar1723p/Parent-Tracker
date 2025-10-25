@@ -10,8 +10,8 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { navigate } from "../navigation/NavigationService";
-// import Feather from "react-native-vector-icons/Feather";
-// import Ionicons from "react-native-vector-icons/Ionicons";
+import Feather from "react-native-vector-icons/Feather";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 export default function ParentDashboardScreen() {
   const children = [
@@ -63,10 +63,10 @@ export default function ParentDashboardScreen() {
           </View>
           <View style={{ flexDirection: "row" }}>
             <TouchableOpacity style={styles.iconBtn}>
-              {/* <Ionicons name="notifications-outline" size={22} color="#222" /> */}
+              <Ionicons name="notifications-outline" size={22} color="#222" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.iconBtn}>
-              {/* <Ionicons name="settings-outline" size={22} color="#222" /> */}
+              <Ionicons name="settings-outline" size={22} color="#222" />
             </TouchableOpacity>
           </View>
         </View>
@@ -74,17 +74,17 @@ export default function ParentDashboardScreen() {
         {/* Stats */}
         <View style={styles.statsRow}>
           <View style={styles.statCard}>
-            {/* <Feather name="smile" size={22} color="#28A745" /> */}
+            <Feather name="smile" size={22} color="#28A745" />
             <Text style={styles.statTitle}>All Safe</Text>
             <Text style={styles.statValue}>3/3</Text>
           </View>
           <View style={styles.statCard}>
-            {/* <Ionicons name="alert-circle-outline" size={22} color="#007BFF" /> */}
+            <Ionicons name="alert-circle-outline" size={22} color="#007BFF" />
             <Text style={styles.statTitle}>Alerts Today</Text>
             <Text style={styles.statValue}>2</Text>
           </View>
           <View style={styles.statCard}>
-            {/* <Ionicons name="people-outline" size={22} color="#6F42C1" /> */}
+            <Ionicons name="people-outline" size={22} color="#6F42C1" />
             <Text style={styles.statTitle}>Active</Text>
             <Text style={styles.statValue}>3</Text>
           </View>
@@ -127,7 +127,7 @@ export default function ParentDashboardScreen() {
                 <Text style={styles.childName}>{child.name}</Text>
                 <Text style={styles.childLocation}>{child.location}</Text>
                 <View style={styles.childStatusRow}>
-                  {/* <Ionicons name="battery-charging" size={14} color="#28A745" /> */}
+                  <Ionicons name="battery-charging" size={14} color="#28A745" />
                   <Text style={styles.childBattery}>{child.battery}</Text>
                   <View
                     style={[
@@ -160,13 +160,13 @@ export default function ParentDashboardScreen() {
           <Text style={styles.cardTitle}>Quick Actions</Text>
           <View style={styles.quickRow}>
             <TouchableOpacity style={styles.quickCard}>
-              {/* <Ionicons name="location-outline" size={22} color="#007BFF" /> */}
+              <Ionicons name="location-outline" size={22} color="#007BFF" />
               <Text style={styles.quickTitle}>Safe Zones</Text>
               <Text style={styles.quickDesc}>Manage geofencing</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={[styles.quickCard, { marginLeft: 12 }]}>
-              {/* <Ionicons name="alert-circle-outline" size={22} color="#FF3B30" /> */}
+              <Ionicons name="alert-circle-outline" size={22} color="#FF3B30" />
               <Text style={styles.quickTitle}>Alerts</Text>
               <Text style={styles.quickDesc}>View notifications</Text>
             </TouchableOpacity>

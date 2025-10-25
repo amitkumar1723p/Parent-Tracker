@@ -11,7 +11,7 @@ import {
 import LinearGradient from "react-native-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { navigate } from "../navigation/NavigationService";
-// import Icon from "react-native-vector-icons/Ionicons";
+import Icon from "react-native-vector-icons/Ionicons";
 
 const AddChildScreen = () => {
   const [name, setName] = useState("");
@@ -38,7 +38,7 @@ const AddChildScreen = () => {
 
       {/* Top Icon */}
       <View style={styles.topIcon}>
-        {/* <Icon name="person-add-outline" size={40} color="#4CAF50" /> */}
+        <Icon name="person-add-outline" size={40} color="#4CAF50" />
       </View>
 
       {/* Title */}
@@ -53,7 +53,7 @@ const AddChildScreen = () => {
         <View style={styles.field}>
           <Text style={styles.label}>Child's Name</Text>
           <View style={styles.inputWrapper}>
-{/* <Icon name="person-outline" size={20} color="#777" /> */}
+<Icon name="person-outline" size={20} color="#777" />
             <TextInput
               style={styles.input}
               placeholder="Enter child's name"
@@ -67,7 +67,7 @@ const AddChildScreen = () => {
         <View style={styles.field}>
           <Text style={styles.label}>Age</Text>
           <View style={styles.inputWrapper}>
-                      {/* <Icon name="calendar-outline" size={20} color="#777" /> */}
+                      <Icon name="calendar-outline" size={20} color="#777" />
             <TextInput
               style={styles.input}
               placeholder="Enter age"
@@ -83,7 +83,7 @@ const AddChildScreen = () => {
           <Text style={styles.label}>Profile Photo (Optional)</Text>
           <View style={styles.photoRow}>
             <TouchableOpacity style={styles.photoPlaceholder}>
-                  {/* <Icon name="camera-outline" size={30} color="#aaa" /> */}
+                  <Icon name="camera-outline" size={30} color="#aaa" />
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.photoButton}
