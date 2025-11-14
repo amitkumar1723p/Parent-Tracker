@@ -5,11 +5,13 @@ export const authApi = baseApi.injectEndpoints({
   endpoints: builder => ({
     login: builder.mutation({
       query: body => ({
-        url: body.email ? '/user/nri-genrate-otp' : '/user/genrate-otp',
+        url:  '/api/auth/register',
         method: 'POST',
         body,
       }),
     }),
+
+    // http://localhost:4000/api/auth/register
     // verifyOtp: builder.mutation({
     //   query: body => ({
     //     url: '/user/verify-otp',

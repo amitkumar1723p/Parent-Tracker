@@ -5,7 +5,8 @@ import { getToken } from '../../utils/keychainStorage';
 export const baseApi = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://192.168.29.19:5000', // ✅ Replace this
+    baseUrl: 'http://10.52.123.12:4000', // ✅ Replace this
+
     // credentials: 'include', // ⬅️ enable cookies if needed
 
     prepareHeaders: async headers => {
@@ -16,6 +17,6 @@ export const baseApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['User', 'Post', 'Visit', 'Bid', 'Favourite'],
+  // tagTypes: ['User', 'Post', 'Visit', 'Bid', 'Favourite'],
   endpoints: () => ({}),
 });

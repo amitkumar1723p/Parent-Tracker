@@ -11,6 +11,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-community/netinfo": "^11.4.1",
     "@react-native-google-signin/google-signin": "^16.0.0",
     "@react-native/new-app-screen": "0.81.4",
     "@react-navigation/bottom-tabs": "^7.4.8",
@@ -19,6 +20,7 @@
     "@reduxjs/toolkit": "^2.9.2",
     "react": "19.1.0",
     "react-native": "0.81.4",
+    "react-native-keychain": "^10.0.0",
     "react-native-linear-gradient": "^2.8.3",
     "react-native-safe-area-context": "^5.6.1",
     "react-native-screens": "^4.16.0",

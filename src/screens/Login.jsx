@@ -15,11 +15,14 @@ import { navigate } from "../navigation/NavigationService";
 import Icon from "react-native-vector-icons/MaterialIcons";
 const { height } = Dimensions.get("window");
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-
+import { useLoginMutation } from '../redux/api/authApi';
+import useHandleMutation from '../hooks/useHandleMutation'
+import { KeyboardAvoidingView, Platform } from "react-native";
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
   const insets = useSafeAreaInsets();
-
+  const [login] = useLoginMutation();
+    const handleMutation = useHandleMutation(); // ✅ Hook ko pehle call karo
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -50,6 +53,15 @@ export default function Login() {
   return (
     <SafeAreaProvider>
       <SafeAreaView  style={styles.container}>
+
+          <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 40}
+    >
+
+
+
       <ScrollView
         contentContainerStyle={[
 
@@ -104,7 +116,10 @@ export default function Login() {
             <TouchableOpacity
               style={[styles.tab, isLogin && styles.activeTab]}
               onPress={() => setIsLogin(true)}
+
+
             >
+
               <Text style={[styles.tabText, isLogin && styles.activeTabText]}>
                 Login
               </Text>
@@ -161,8 +176,18 @@ export default function Login() {
 
             {/* Gradient Button */}
             <TouchableOpacity
+
               style={{ marginTop: 20 }}
-              onPress={() => navigate("role-selector")}
+              // onPress={() => navigate("role-selector")}
+
+               onPress={ async ()=>{
+let res = await handleMutation({
+              apiFunc: login,
+              params: { ...{Name:"Amit"} },
+            })
+  console.log(res ,"response")
+               }}
+
             >
               <LinearGradient
                 colors={["#007BFF", "#00C851"]}
@@ -188,6 +213,8 @@ export default function Login() {
           </TouchableOpacity>
         </View>
       </ScrollView>
+</KeyboardAvoidingView>
+
       </SafeAreaView>
     </SafeAreaProvider>
   );

@@ -18,8 +18,8 @@ import alertReducer from './slices/alertSlice.js';
 
 export const store = configureStore({
   reducer: {
-    auth: authReducer,
-    // alert: alertReducer,
+    // auth: alertReducer,
+    alert: alertReducer,
     [baseApi.reducerPath]: baseApi.reducer,
   },
   middleware: getDefaultMiddleware =>
