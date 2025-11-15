@@ -1,28 +1,27 @@
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import React, { useEffect, useState } from "react";
 import {
-  View,
+  Dimensions,
+  KeyboardAvoidingView, Platform,
+  ScrollView,
+  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-  Dimensions,
-  Alert,
+  View
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
-import { navigate } from "../navigation/NavigationService";
 import Icon from "react-native-vector-icons/MaterialIcons";
-const { height } = Dimensions.get("window");
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import useHandleMutation from '../hooks/useHandleMutation';
 import { useLoginMutation } from '../redux/api/authApi';
-import useHandleMutation from '../hooks/useHandleMutation'
-import { KeyboardAvoidingView, Platform } from "react-native";
+const { height } = Dimensions.get("window");
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
   const insets = useSafeAreaInsets();
   const [login] = useLoginMutation();
-    const handleMutation = useHandleMutation(); // ✅ Hook ko pehle call karo
+ const handleMutation = useHandleMutation(); // ✅ Hook ko pehle call karo
+  const [userData ,setUserData] =useState({})
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -101,7 +100,7 @@ export default function Login() {
 
 
 
-           <View>
+      <View>
 
   </View>
           <Text style={styles.subtitle}>
@@ -138,12 +137,20 @@ export default function Login() {
           <View style={styles.form}>
             <View style={styles.inputWrapper}>
                       <Icon name="email" size={20} color="#aaa" />
-              <TextInput
-                style={styles.input}
-                placeholder="Email address"
-                placeholderTextColor="#aaa"
-              />
+
+{/* Name  Input */}
+            <TextInput
+  style={styles.input}
+  placeholder="Email address"
+  placeholderTextColor="#aaa"
+  onChangeText={(text) => {
+    setUserData({ ...userData, name: text });
+  }}
+/>
+               { console.log(userData ,"Userdata")}
             </View>
+
+
             <View style={styles.inputWrapper}>
                <Icon name="phone" size={20} color="#aaa" />
               <TextInput
@@ -152,6 +159,7 @@ export default function Login() {
                 placeholderTextColor="#aaa"
               />
             </View>
+
             <View style={styles.inputWrapper}>
                <Icon name="lock" size={20} color="#aaa" />
               <TextInput

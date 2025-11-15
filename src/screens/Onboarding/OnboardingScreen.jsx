@@ -2,12 +2,12 @@
 
 
 
-import { View, Text, ScrollView, StyleSheet, Dimensions } from "react-native";
-import React, { useState, useRef } from "react";
-import { Onboarding1, Onboarding2, Onboarding3 } from "./components/OnboardingComponent";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import React, { useRef, useState } from "react";
+import { Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { navigate } from "../../navigation/NavigationService";
+import { Onboarding1, Onboarding2, Onboarding3 } from "./components/OnboardingComponent";
 
 const { width } = Dimensions.get("window");
 
@@ -17,7 +17,7 @@ const OnboardingScreen = () => {
 
   // Navigate to login when finish
   const onFinish = () => {
-    navigate("login");
+    navigate("EnterEmail");
   };
 
   // Jab horizontal scroll hoga → page index calculate karke set kar dena

@@ -1,23 +1,26 @@
 
 
 
-import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
- import { navigationRef, safeReplace } from './NavigationService';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { navigationRef } from './NavigationService';
 
 // Screens
-import OnboardingScreen from "../screens/Onboarding/OnboardingScreen";
-import Login from "../screens/Login";
-import RoleSelector from "../screens/RoleSelector";
+import AddChildScreen from "../screens/AddChildScreen";
+import AddInviteScreen from '../screens/AddInviteScreen';
+import ChildDashboardScreen from "../screens/ChildDashboardScreen";
+import CompleteProfileScreen from "../screens/CompleteProfileScreen";
 import ConnectToParentScreen from "../screens/ConnectToParentScreen";
 import ConnectedSuccessScreen from "../screens/ConnectedSuccessScreen";
-import ChildDashboardScreen from "../screens/ChildDashboardScreen";
+import EnterEmailScreen from "../screens/EnterEmailScreen";
+import Login from "../screens/Login";
+import OnboardingScreen from "../screens/Onboarding/OnboardingScreen";
 import ParentDashboardScreen from "../screens/ParentDashboardScreen";
-import AddChildScreen from "../screens/AddChildScreen";
-import AddInviteScreen from '../screens/AddInviteScreen'
+import RoleSelector from "../screens/RoleSelector";
+import VerifyOtpScreen from "../screens/VerifyOtpScreen";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -97,6 +100,12 @@ const AppNavigator = () => {
         <Stack.Screen name="onboarding" component={OnboardingScreen} />
         <Stack.Screen name="login" component={Login} />
         <Stack.Screen name="role-selector" component={RoleSelector} />
+        <Stack.Screen name="EnterEmail" component={EnterEmailScreen} />
+<Stack.Screen name="VerifyOtp" component={VerifyOtpScreen} />
+<Stack.Screen name="CompleteProfile" component={CompleteProfileScreen} />
+{/* <Stack.Screen name="VerifyOtp" component={VerifyOtpScreen} />
+<Stack.Screen name="CompleteProfile" component={CompleteProfileScreen} /> */}
+
         {/* <Stack.Screen name="child" component={ConnectToParentScreen} />
 
         */}
