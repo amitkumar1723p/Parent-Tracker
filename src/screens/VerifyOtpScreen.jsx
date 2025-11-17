@@ -1,20 +1,37 @@
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
-    KeyboardAvoidingView,
-    Platform,
-    ScrollView,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { useSelector } from "react-redux";
+import useHandleMutation from "../hooks/useHandleMutation";
 import { navigate } from "../navigation/NavigationService";
+import { useVerifyOtpMutation } from "../redux/api/authApi";
 
 export default function VerifyOtpScreen({ route }) {
+  const [verifyOtp] = useVerifyOtpMutation();
+ const handleMutation = useHandleMutation();
+  const loading = useSelector(state => state.alert.loadingMap.sendOtpLoading);
   const { email } = route.params;
-  const [otp, setOtp] = useState("");
+
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const refs = Array.from({ length: 6 }, () => useRef());
+
+  const handleOtpChange = (value, index) => {
+    const newOtp = [...otp];
+    newOtp[index] = value;
+    setOtp(newOtp);
+
+    if (value && index < 5) refs[index + 1].current.focus();
+  };
 
   return (
     <KeyboardAvoidingView
@@ -22,97 +39,179 @@ export default function VerifyOtpScreen({ route }) {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <ScrollView contentContainerStyle={styles.container}>
+
         {/* Header */}
         <LinearGradient
           colors={["#eff6ff", "#f0fdf4"]}
           style={styles.header}
         >
-          <LinearGradient colors={["#007BFF", "#00C851"]} style={styles.logo}>
+          <LinearGradient colors={["#007BFF", "#00C851"]} style={styles.iconBox}>
             <Icon name="lock" size={28} color="#fff" />
           </LinearGradient>
 
           <Text style={styles.title}>Verify OTP</Text>
-          <Text style={styles.subtitle}>OTP sent to: {email}</Text>
+          <Text style={styles.subtitle}>OTP sent to {email}</Text>
         </LinearGradient>
 
-        {/* OTP Input */}
-        <View style={styles.content}>
-          <View style={styles.inputWrapper}>
-            <Icon name="vpn-key" size={20} color="#aaa" />
-            <TextInput
-              style={styles.input}
-              placeholder="Enter OTP"
-              placeholderTextColor="#aaa"
-              keyboardType="numeric"
-              onChangeText={(text) => setOtp(text)}
-            />
+        {/* Card */}
+        <View style={styles.card}>
+          {/* OTP Boxes */}
+          <View style={styles.otpRow}>
+            {otp.map((digit, index) => (
+              <TextInput
+                key={index}
+                ref={refs[index]}
+                style={styles.otpInput}
+                maxLength={1}
+                keyboardType="numeric"
+                onChangeText={(v) => handleOtpChange(v, index)}
+                value={digit}
+              />
+            ))}
           </View>
 
-          <TouchableOpacity
-            onPress={() => navigate("CompleteProfile", { email })}
-            style={{ marginTop: 20 }}
-          >
+          {/* Verify Button */}
+          <TouchableOpacity style={{ marginTop: 20 }}
+          disabled={loading}
+          activeOpacity={0.7}
+            onPress={
+              async ()=>{
+                  let res = await handleMutation({
+                          apiFunc: verifyOtp,
+                          params: { otp:otp.join('') , email},
+                          label :'verifyOtpLoading',
+                        })
+
+   console.log(res ,"response  verify otp")
+                         if(res.status&&!res.token){
+                           navigate("CompleteProfile" ,{ email })
+
+                         }
+
+                           }}
+
+
+           >
+
             <LinearGradient colors={["#007BFF", "#00C851"]} style={styles.button}>
-              <Text style={styles.buttonText}>Verify</Text>
+               {
+                loading ? <ActivityIndicator size="small" color="#fff" />:<Text style={styles.buttonText}>Verify</Text>
+               }
+
             </LinearGradient>
           </TouchableOpacity>
+
+          {/* Resend */}
+          <Text style={styles.resendText}>Resend OTP</Text>
+
+          {/* Info Box */}
+          <View style={styles.infoBox}>
+            <Icon name="security" size={18} color="#4a90e2" />
+            <Text style={styles.infoText}>
+              Enter the 6-digit code sent to your email.
+            </Text>
+          </View>
         </View>
+
       </ScrollView>
     </KeyboardAvoidingView>
   );
 }
 
-const styles = {
-  container: { flexGrow: 1, backgroundColor: "#F9FAFB" },
+const styles = StyleSheet.create({
+  container: {
+    flexGrow: 1,
+    backgroundColor: "#F9FAFB",
+    padding: 20,
+  },
+
   header: {
     alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 40,
+    marginBottom: 30,
   },
-  logo: {
-    width: 60,
-    height: 60,
-    borderRadius: 15,
+
+  iconBox: {
+    width: 70,
+    height: 70,
+    borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 10,
+    marginBottom: 15,
   },
+
   title: {
+    fontSize: 28,
     fontFamily: "Roboto-Bold",
-    fontSize: 24,
     color: "#111",
   },
+
   subtitle: {
+    fontSize: 14,
     fontFamily: "Roboto-Regular",
-    fontSize: 13,
     color: "#555",
     marginTop: 5,
   },
-  content: { paddingHorizontal: 20, marginTop: 30 },
-  inputWrapper: {
-    flexDirection: "row",
-    alignItems: "center",
+
+  card: {
     backgroundColor: "#fff",
-    borderRadius: 10,
-    paddingHorizontal: 12,
-    borderWidth: 1,
-    borderColor: "#eee",
+    padding: 25,
+    borderRadius: 20,
+    shadowColor: "#000",
+    shadowOpacity: 0.08,
+    shadowRadius: 15,
+    elevation: 5,
   },
-  input: {
-    flex: 1,
-    paddingVertical: 12,
-    marginLeft: 10,
+
+  otpRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+
+  otpInput: {
+    width: 45,
+    height: 55,
+    borderRadius: 12,
+    borderWidth: 2,
+    borderColor: "#007BFF",
+    textAlign: "center",
+    fontSize: 20,
     color: "#111",
-    fontFamily: "Roboto-Regular",
+    fontFamily: "Roboto-Bold",
+    backgroundColor: "#fff",
   },
+
   button: {
     paddingVertical: 14,
     borderRadius: 25,
     alignItems: "center",
   },
+
   buttonText: {
     color: "#fff",
     fontSize: 16,
     fontFamily: "Roboto-SemiBold",
   },
-};
+
+  resendText: {
+    textAlign: "center",
+    marginTop: 10,
+    color: "#4a90e2",
+    fontFamily: "Roboto-SemiBold",
+  },
+
+  infoBox: {
+    flexDirection: "row",
+    marginTop: 15,
+    backgroundColor: "#e8f0ff",
+    padding: 12,
+    borderRadius: 12,
+    alignItems: "center",
+  },
+
+  infoText: {
+    color: "#4a90e2",
+    fontSize: 12,
+    fontFamily: "Roboto-Regular",
+    marginLeft: 8,
+  },
+});

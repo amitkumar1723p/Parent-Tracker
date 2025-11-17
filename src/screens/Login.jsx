@@ -147,7 +147,7 @@ export default function Login() {
     setUserData({ ...userData, name: text });
   }}
 />
-               { console.log(userData ,"Userdata")}
+
             </View>
 
 
@@ -193,7 +193,7 @@ let res = await handleMutation({
               apiFunc: login,
               params: { ...{Name:"Amit"} },
             })
-  console.log(res ,"response")
+
                }}
 
             >

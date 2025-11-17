@@ -1,20 +1,28 @@
 import React, { useState } from "react";
 import {
-    KeyboardAvoidingView,
-    Platform,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { useSelector } from "react-redux";
+import useHandleMutation from "../hooks/useHandleMutation";
 import { navigate } from "../navigation/NavigationService";
+import { useSendOtpMutation } from "../redux/api/authApi";
 
 export default function EnterEmailScreen() {
   const [email, setEmail] = useState("");
+  const [sendOtp] = useSendOtpMutation();
+ const handleMutation = useHandleMutation();
+
+  const loading = useSelector(state => state.alert.loadingMap.sendOtpLoading);
 
   return (
     <KeyboardAvoidingView
@@ -49,14 +57,43 @@ export default function EnterEmailScreen() {
             />
           </View>
 
-          <TouchableOpacity
-            onPress={() => navigate("VerifyOtp", { email })}
+
+
+
+
+
+         <TouchableOpacity
+  disabled={loading || !email}
+ onPress={
+  async ()=>{
+      let res = await handleMutation({
+              apiFunc: sendOtp,
+              params: { email},
+              label :'sendOtpLoading',
+
+            })
+             if(res.status){
+               navigate("VerifyOtp" ,{ email })
+
+             }
+
+               }}
+
             style={{ marginTop: 15 }}
-          >
-            <LinearGradient colors={["#007BFF", "#00C851"]} style={styles.button}>
-              <Text style={styles.buttonText}>Send OTP</Text>
-            </LinearGradient>
-          </TouchableOpacity>
+  activeOpacity={0.7}
+>
+  <LinearGradient
+    colors={["#007BFF", "#00C851"]}
+    style={[styles.button,   (loading || !email) && { opacity: 0.6 }]}
+  >
+    {loading ? (
+      <ActivityIndicator size="small" color="#fff" />
+    ) : (
+      <Text style={styles.buttonText}>Send OTP</Text>
+    )}
+  </LinearGradient>
+</TouchableOpacity>
+
 
           {/* Info Box */}
           <View style={styles.infoBox}>

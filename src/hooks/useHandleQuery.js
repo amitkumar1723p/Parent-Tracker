@@ -1,6 +1,6 @@
 // 📁 src/hooks/useHandleQuery.js
 import { useDispatch } from 'react-redux';
-import { pushAlert, setLoading } from '../redux/slices/alertSlice';
+import { clearLoadingKey, pushAlert, setLoading } from '../redux/slices/alertSlice';
 
 const useHandleQuery = () => {
   const dispatch = useDispatch();
@@ -53,6 +53,9 @@ const useHandleQuery = () => {
       return null;
     } finally {
       dispatch(setLoading({ key: label, value: false }));
+
+       // ⭐⭐ COMPLETELY REMOVE KEY
+      dispatch(clearLoadingKey(label));
     }
   };
 

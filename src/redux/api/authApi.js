@@ -3,37 +3,40 @@ import { baseApi } from './baseApi';
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: builder => ({
-    login: builder.mutation({
+    sendOtp: builder.mutation({
       query: body => ({
-        url:  '/api/auth/register',
+        url:  '/api/auth/v1/send-otp',
         method: 'POST',
         body,
       }),
     }),
 
-    // http://localhost:4000/api/auth/register
-    // verifyOtp: builder.mutation({
-    //   query: body => ({
-    //     url: '/user/verify-otp',
-    //     method: 'POST',
-    //     body,
-    //   }),
-    // }),
-    // editProfile: builder.mutation({
-    //   query: body => ({
-    //     url: '/user/updateProfile',
-    //     method: 'PUT',
-    //     body,
-    //   }),
-    // }),
-    // getMe: builder.query({
-    //   query: () => '/user/data',
-    //   providesTags: ['User'],
-    // }),
+   verifyOtp: builder.mutation({
+      query: body => ({
+        url:  '/api/auth/v1/verify-otp',
+        method: 'POST',
+        body,
+      }),
+    }),
+
+
+   completeProfile: builder.mutation({
+      query: body => ({
+        url:  '/api/auth/v1/complete-profile',
+        method: 'POST',
+        body,
+      }),
+    }),
+
+
+
+
   }),
 });
 export const {
-  useLoginMutation,
+  useSendOtpMutation ,
+  useVerifyOtpMutation,
+ useCompleteProfileMutation
 //   useLazyGetMeQuery,
 //   useEditProfileMutation,
 //   useVerifyOtpMutation,

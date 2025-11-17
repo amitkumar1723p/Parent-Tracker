@@ -22,8 +22,12 @@ const alertSlice = createSlice({
       const { key, value } = action.payload;
       state.loadingMap[key] = value;
     },
+    clearLoadingKey: (state, action) => {
+  const key = action.payload;
+  delete state.loadingMap[key]; // remove key completely
+},
   },
 });
 
-export const { pushAlert, removeAlertById, setLoading } = alertSlice.actions;
+export const { pushAlert, removeAlertById, setLoading  , clearLoadingKey} = alertSlice.actions;
 export default alertSlice.reducer;

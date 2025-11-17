@@ -1,7 +1,7 @@
 // 📁 src/hooks/useHandleMutation.js
 import NetInfo from '@react-native-community/netinfo';
 import { useDispatch } from 'react-redux';
-import { pushAlert, setLoading } from '../redux/slices/alertSlice';
+import { clearLoadingKey, pushAlert, setLoading } from '../redux/slices/alertSlice';
 import { withTimeout } from '../utils/withTimeout';
 
 const useHandleMutation = () => {
@@ -43,7 +43,7 @@ const useHandleMutation = () => {
           }),
         );
       }
-      console.log(res, 'res');
+      ;
 
       return res;
     } catch (err) {
@@ -76,6 +76,10 @@ const useHandleMutation = () => {
       return null;
     } finally {
       dispatch(setLoading({ key: label, value: false }));
+      // dispatch(setLoading({ key: label, value: false }));
+
+      // ⭐⭐ COMPLETELY REMOVE KEY
+      dispatch(clearLoadingKey(label));
     }
   };
 
