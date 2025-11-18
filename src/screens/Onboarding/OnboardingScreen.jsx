@@ -17,7 +17,9 @@ const OnboardingScreen = () => {
 
   // Navigate to login when finish
   const onFinish = () => {
-    navigate("EnterEmail");
+    // navigate("EnterEmail");
+   navigate("CompleteProfile" ,{ email :"coder1338@gmail.com"})
+
   };
 
   // Jab horizontal scroll hoga → page index calculate karke set kar dena

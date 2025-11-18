@@ -139,7 +139,6 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { useSelector } from "react-redux";
 import BottomSheetModal from "../components/BottomSheetModal";
 import useHandleMutation from "../hooks/useHandleMutation";
-import { replace } from "../navigation/NavigationService";
 import { useCompleteProfileMutation } from "../redux/api/authApi";
 
 // ⚠️ OPTIONAL: if you use react-native-image-picker, uncomment and install
@@ -166,9 +165,7 @@ export default function CompleteProfileScreen() {
   );
 
   const [photo, setPhoto] = useState(null);
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [role, setRole] = useState(null); // 'parent' | 'child'
+
   const [gender, setGender] = useState(null);
   const [dob, setDob] = useState(null);
 
@@ -178,11 +175,29 @@ export default function CompleteProfileScreen() {
 
 
 
-
+const roles = [
+  {
+    key: "parent",
+    label: "Parent",
+    icon: "account-group-outline",
+    activeColor: "#4A90FF",
+    bgColor: "#F7FBFF",
+    borderColor: "#161719ff",
+  },
+  {
+    key: "child",
+    label: "Child",
+    icon: "account-child-outline",
+    activeColor: "#00C851",
+    bgColor: "#F6FFF9",
+    borderColor: "#00C851",
+  },
+];
 
   //  Api Call   functions
     const [completeProfile] = useCompleteProfileMutation();
    const handleMutation = useHandleMutation();
+     const [userData ,setUserData] = useState({})
 
   const onPickPhoto = async () => {
     // If image-picker installed:
@@ -203,8 +218,8 @@ export default function CompleteProfileScreen() {
   const onSubmit = () => {
     // UI only — add API later
     // validate UI quickly
-    if (!name || !phone || !role) return;
-    replace("Home");
+    // if (!name || !phone || !role) return;
+    // replace("Home");
   };
 
   return (
@@ -250,16 +265,17 @@ export default function CompleteProfileScreen() {
             <Text style={styles.tapText}>Tap to add photo</Text>
           </View>
 
+ {console.log(userData  ,"userData")}
           {/* Name */}
           <View style={styles.inputWrapper}>
             <MaterialCommunityIcons name="account-outline" size={18} color="#9AA7AD" />
-            <TextInput
-              style={styles.input}
-              placeholder="Full Name *"
-              placeholderTextColor="#9AA7AD"
-              value={name}
-              onChangeText={setName}
-            />
+          <TextInput
+  style={styles.input}
+  placeholder="Full Name *"
+  placeholderTextColor="#9AA7AD"
+  value={userData?.name || ""}
+  onChangeText={(text) => setUserData({ ...userData, name: text })}
+/>
           </View>
 
           {/* Phone */}
@@ -270,92 +286,85 @@ export default function CompleteProfileScreen() {
               placeholder="Phone Number *"
               placeholderTextColor="#9AA7AD"
               keyboardType="phone-pad"
-              value={phone}
-              onChangeText={setPhone}
+
+               value={userData?.phone || ""}
+
+               onChangeText={(text) => setUserData({ ...userData, phone: text })}
             />
           </View>
 
           {/* Role */}
           <Text style={styles.label}>Role *</Text>
           <View style={styles.roleRow}>
-            <TouchableOpacity
-              activeOpacity={0.9}
-              onPress={() => setRole("parent")}
-              style={[
-                styles.roleBox,
-                role === "parent" && { borderColor: "#4A90FF", backgroundColor: "#F7FBFF" },
-              ]}
-            >
-              <MaterialCommunityIcons
-                name="account-group-outline"
-                size={22}
-                color={role === "parent" ? "#4A90FF" : "#6B7A86"}
-              />
-              <Text
-                style={[
-                  styles.roleText,
-                  role === "parent" && { color: "#0B1220", fontFamily: "Roboto-Bold" },
-                ]}
-              >
-                Parent
-              </Text>
-              <View style={styles.roleCheckWrap}>
-                {role === "parent" ? (
-                  <View style={[styles.checkCircle, { backgroundColor: "#4A90FF" }]}>
-                    <AntDesign name="check" size={12} color="#fff" />
-                  </View>
-                ) : (
-                  <View style={styles.emptyDot} />
-                )}
-              </View>
-            </TouchableOpacity>
 
-            <TouchableOpacity
-              activeOpacity={0.9}
-              onPress={() => setRole("child")}
-              style={[
-                styles.roleBox,
-                role === "child" && { borderColor: "#00C851", backgroundColor: "#F6FFF9" },
-              ]}
-            >
-              <MaterialCommunityIcons
-                name="account-child-outline"
-                size={22}
-                color={role === "child" ? "#00C851" : "#6B7A86"}
-              />
-              <Text
-                style={[
-                  styles.roleText,
-                  role === "child" && { color: "#0B1220", fontFamily: "Roboto-Bold" },
-                ]}
-              >
-                Child
-              </Text>
-              <View style={styles.roleCheckWrap}>
-                {role === "child" ? (
-                  <View style={[styles.checkCircle, { backgroundColor: "#00C851" }]}>
-                    <AntDesign name="check" size={12} color="#fff" />
-                  </View>
-                ) : (
-                  <View style={styles.emptyDot} />
-                )}
-              </View>
-            </TouchableOpacity>
+
+
+
+
+
+{roles.map((item) => (
+  <TouchableOpacity
+    key={item.key}
+    activeOpacity={0.9}
+    onPress={() => setUserData({ ...userData, role: item.key })}
+    style={[
+      styles.roleBox,
+      userData.role === item.key && {
+        borderColor: item.borderColor,
+        backgroundColor: item.bgColor,
+      },
+    ]}
+  >
+    <MaterialCommunityIcons
+      name={item.icon}
+      size={22}
+      color={userData.role === item.key ? item.activeColor : "#6B7A86"}
+    />
+
+    <Text
+      style={[
+        styles.roleText,
+        userData.role === item.key && { color: "#0B1220", fontFamily: "Roboto-Bold" },
+      ]}
+    >
+      {item.label}
+    </Text>
+
+    <View style={styles.roleCheckWrap}>
+      {userData.role === item.key ? (
+        <View style={[styles.checkCircle, { backgroundColor: item.activeColor }]}>
+          <AntDesign name="check" size={12} color="#fff" />
+        </View>
+      ) : (
+        <View style={styles.emptyDot} />
+      )}
+    </View>
+  </TouchableOpacity>
+))}
+
+
+
+
+
+
+
+
+
           </View>
 
           {/* Features box (like your RoleSelector) */}
-          {role && (
+          {userData?.role && (
             <View style={styles.featuresBox}>
               <Text style={styles.featuresTitle}>
-                {role === "parent" ? "Parent Features" : "Child Features"}
+                {userData?.role === "parent" ? "Parent Features" : "Child Features"}
               </Text>
-              {FEATURES[role].map((f, i) => (
+              {FEATURES[userData?.role].map((f, i) => (
                 <View key={i} style={styles.featureRow}>
                   <View style={styles.featureIconWrap}>
                     <MaterialIcons
                       name={f.icon}
                       size={18}
-                      color={role === "parent" ? "#4A90FF" : "#00C851"}
+                      color={userData?.role === "parent" ? "#4A90FF" : "#00C851"}
                     />
                   </View>
                   <Text style={styles.featureText}>{f.text}</Text>
@@ -367,7 +376,7 @@ export default function CompleteProfileScreen() {
           {/* Optional Info */}
           <Text style={[styles.label, { marginTop: 14 }]}>Optional Information</Text>
 
-          {/* Gender (opens bottom sheet)
+          {/* Gender (opens bottom sheet) */}
           <TouchableOpacity
             activeOpacity={0.9}
             onPress={() => setGenderSheet(true)}
@@ -381,10 +390,10 @@ export default function CompleteProfileScreen() {
               {gender || "Select Gender"}
             </Text>
             <MaterialIcons name="keyboard-arrow-down" size={20} color="#9AA7AD" />
-          </TouchableOpacity> */}
+          </TouchableOpacity>
 {/* ------------------------DOB start -------------------------------- */}
           {/* DOB (opens bottom sheet) */}
-          <TouchableOpacity
+          {/* <TouchableOpacity
             activeOpacity={0.9}
             onPress={() => setDobSheet(true)}
             style={styles.inputWrapper}
@@ -397,7 +406,7 @@ export default function CompleteProfileScreen() {
               {dob || "dd-mm-yyyy"}
             </Text>
             <MaterialIcons name="calendar-today" size={18} color="#9AA7AD" />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 {/* ------------------------------DOB----------------------------- */}
           {/* Button */}
           <TouchableOpacity activeOpacity={0.9} onPress={onSubmit} disabled={loading}>
@@ -431,7 +440,7 @@ export default function CompleteProfileScreen() {
         title="Select Gender"
         onClose={() => setGenderSheet(false)}
       >
-        {["Male", "Female", "Other", "Prefer not to say"].map((g) => (
+        {["Male", "Female", "Other"].map((g) => (
           <TouchableOpacity
             key={g}
             activeOpacity={0.9}
