@@ -18,7 +18,7 @@ const OnboardingScreen = () => {
   // Navigate to login when finish
   const onFinish = () => {
     // navigate("EnterEmail");
-   navigate("CompleteProfile" ,{ email :"coder1338@gmail.com"})
+    navigate("CompleteProfile", { email: "coder1338@gmail.com" })
 
   };
 
@@ -53,9 +53,9 @@ const OnboardingScreen = () => {
             showsVerticalScrollIndicator={false}
           >
 
- <Text style={[styles.skip]} // safe area ke niche 10 px
+            <Text style={[styles.skip]} // safe area ke niche 10 px
 
-    onPress={onFinish}>Skip</Text>
+              onPress={onFinish}>Skip</Text>
 
             {/* INNER ScrollView → horizontal swipe pages */}
             <ScrollView
@@ -98,14 +98,14 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 
-   skip: {
- fontFamily:'Roboto-Medium',
-  fontSize: 16,
-  color: "#007BFF",
-  fontWeight: "600",
-  alignSelf:'flex-end',
-marginRight:10,
-marginTop:10,
+  skip: {
+    fontFamily: 'Roboto-Medium',
+    fontSize: 16,
+    color: "#007BFF",
+    fontWeight: "600",
+    alignSelf: 'flex-end',
+    marginRight: 10,
+    marginTop: 10,
 
 
   },

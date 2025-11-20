@@ -20,8 +20,8 @@ export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
   const insets = useSafeAreaInsets();
   const [login] = useLoginMutation();
- const handleMutation = useHandleMutation(); // ✅ Hook ko pehle call karo
-  const [userData ,setUserData] =useState({})
+  const handleMutation = useHandleMutation(); // ✅ Hook ko pehle call karo
+  const [userData, setUserData] = useState({})
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -34,9 +34,9 @@ export default function Login() {
   // handle continue  with google
 
 
-   const continueWithGoogle = async () =>{
+  const continueWithGoogle = async () => {
 
-  try {
+    try {
       await GoogleSignin.signOut(); // ✅ purana session clear
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
@@ -47,181 +47,181 @@ export default function Login() {
     } catch (error) {
       console.log('❌ Google Signin Error:', error);
     }
-   }
+  }
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView  style={styles.container}>
+      <SafeAreaView style={styles.container}>
 
-          <KeyboardAvoidingView
-      style={{ flex: 1 }}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 40}
-    >
-
-
-
-      <ScrollView
-        contentContainerStyle={[
-
-          { paddingBottom: insets.bottom + 20 },
-        ]}
-        showsVerticalScrollIndicator={false}
-      >
-        {/* Header with Gradient */}
-        <LinearGradient
-          style={[
-            styles.header,
-            // {
-            //   paddingTop: insets.top + 40, // responsive top padding (status bar safe)
-            // },
-          ]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}
-          colors={["#eff6ff", "#f0fdf4"]}
+        <KeyboardAvoidingView
+          style={{ flex: 1 }}
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 40}
         >
 
 
 
+          <ScrollView
+            contentContainerStyle={[
 
-
-          <LinearGradient
-            colors={["#007BFF", "#00C851"]}
-            style={styles.logoContainer}
+              { paddingBottom: insets.bottom + 20 },
+            ]}
+            showsVerticalScrollIndicator={false}
           >
-        <Icon name="location-pin" size={28} color="white" />
-          </LinearGradient>
-
-
-          <Text style={styles.title}>SafeTracker</Text>
-
-
-
-
-
-
-      <View>
-
-  </View>
-          <Text style={styles.subtitle}>
-            Keep your family safe and connected
-          </Text>
-        </LinearGradient>
-
-        {/* Content Section */}
-        <View style={styles.content}>
-          {/* Tabs */}
-          <View style={styles.tabContainer}>
-            <TouchableOpacity
-              style={[styles.tab, isLogin && styles.activeTab]}
-              onPress={() => setIsLogin(true)}
-
-
+            {/* Header with Gradient */}
+            <LinearGradient
+              style={[
+                styles.header,
+                // {
+                //   paddingTop: insets.top + 40, // responsive top padding (status bar safe)
+                // },
+              ]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              colors={["#eff6ff", "#f0fdf4"]}
             >
 
-              <Text style={[styles.tabText, isLogin && styles.activeTabText]}>
-                Login
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.tab, !isLogin && styles.activeTab]}
-              onPress={() => setIsLogin(false)}
-            >
-              <Text style={[styles.tabText, !isLogin && styles.activeTabText]}>
-                Sign Up
-              </Text>
-            </TouchableOpacity>
-          </View>
-
-          {/* Form Inputs */}
-          <View style={styles.form}>
-            <View style={styles.inputWrapper}>
-                      <Icon name="email" size={20} color="#aaa" />
-
-{/* Name  Input */}
-            <TextInput
-  style={styles.input}
-  placeholder="Email address"
-  placeholderTextColor="#aaa"
-  onChangeText={(text) => {
-    setUserData({ ...userData, name: text });
-  }}
-/>
-
-            </View>
 
 
-            <View style={styles.inputWrapper}>
-               <Icon name="phone" size={20} color="#aaa" />
-              <TextInput
-                style={styles.input}
-                placeholder="Phone number"
-                placeholderTextColor="#aaa"
-              />
-            </View>
 
-            <View style={styles.inputWrapper}>
-               <Icon name="lock" size={20} color="#aaa" />
-              <TextInput
-                style={styles.input}
-                placeholder="Password"
-                secureTextEntry
-                placeholderTextColor="#aaa"
-              />
-            </View>
 
-            {!isLogin && (
-              <View style={styles.inputWrapper}>
-                 <Icon name="lock" size={20} color="#aaa" />
-                <TextInput
-                  style={styles.input}
-                  placeholder="Confirm password"
-                  secureTextEntry
-                  placeholderTextColor="#aaa"
-                />
-              </View>
-            )}
-
-            {/* Gradient Button */}
-            <TouchableOpacity
-
-              style={{ marginTop: 20 }}
-              // onPress={() => navigate("role-selector")}
-
-               onPress={ async ()=>{
-let res = await handleMutation({
-              apiFunc: login,
-              params: { ...{Name:"Amit"} },
-            })
-
-               }}
-
-            >
               <LinearGradient
                 colors={["#007BFF", "#00C851"]}
-                style={styles.button}
+                style={styles.logoContainer}
               >
-                <Text style={styles.buttonText}>
-                  {isLogin ? "Login" : "Create Account"}
-                </Text>
+                <Icon name="location-pin" size={28} color="white" />
               </LinearGradient>
-            </TouchableOpacity>
-          </View>
 
-          {/* Divider */}
-          <View style={styles.dividerContainer}>
-            <View style={styles.divider} />
-            <Text style={styles.dividerText}>or continue with</Text>
-            <View style={styles.divider} />
-          </View>
 
-          {/* Google Button */}
-          <TouchableOpacity style={styles.googleButton}  onPress={continueWithGoogle}>
-            <Text style={styles.googleButtonText}>Continue with Google</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-</KeyboardAvoidingView>
+              <Text style={styles.title}>SafeTracker</Text>
+
+
+
+
+
+
+              <View>
+
+              </View>
+              <Text style={styles.subtitle}>
+                Keep your family safe and connected
+              </Text>
+            </LinearGradient>
+
+            {/* Content Section */}
+            <View style={styles.content}>
+              {/* Tabs */}
+              <View style={styles.tabContainer}>
+                <TouchableOpacity
+                  style={[styles.tab, isLogin && styles.activeTab]}
+                  onPress={() => setIsLogin(true)}
+
+
+                >
+
+                  <Text style={[styles.tabText, isLogin && styles.activeTabText]}>
+                    Login
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.tab, !isLogin && styles.activeTab]}
+                  onPress={() => setIsLogin(false)}
+                >
+                  <Text style={[styles.tabText, !isLogin && styles.activeTabText]}>
+                    Sign Up
+                  </Text>
+                </TouchableOpacity>
+              </View>
+
+              {/* Form Inputs */}
+              <View style={styles.form}>
+                <View style={styles.inputWrapper}>
+                  <Icon name="email" size={20} color="#aaa" />
+
+                  {/* Name  Input */}
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Email address"
+                    placeholderTextColor="#aaa"
+                    onChangeText={(text) => {
+                      setUserData({ ...userData, name: text });
+                    }}
+                  />
+
+                </View>
+
+
+                <View style={styles.inputWrapper}>
+                  <Icon name="phone" size={20} color="#aaa" />
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Phone number"
+                    placeholderTextColor="#aaa"
+                  />
+                </View>
+
+                <View style={styles.inputWrapper}>
+                  <Icon name="lock" size={20} color="#aaa" />
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Password"
+                    secureTextEntry
+                    placeholderTextColor="#aaa"
+                  />
+                </View>
+
+                {!isLogin && (
+                  <View style={styles.inputWrapper}>
+                    <Icon name="lock" size={20} color="#aaa" />
+                    <TextInput
+                      style={styles.input}
+                      placeholder="Confirm password"
+                      secureTextEntry
+                      placeholderTextColor="#aaa"
+                    />
+                  </View>
+                )}
+
+                {/* Gradient Button */}
+                <TouchableOpacity
+
+                  style={{ marginTop: 20 }}
+                  // onPress={() => navigate("role-selector")}
+
+                  onPress={async () => {
+                    let res = await handleMutation({
+                      apiFunc: login,
+                      params: { ...{ Name: "Amit" } },
+                    })
+
+                  }}
+
+                >
+                  <LinearGradient
+                    colors={["#007BFF", "#00C851"]}
+                    style={styles.button}
+                  >
+                    <Text style={styles.buttonText}>
+                      {isLogin ? "Login" : "Create Account"}
+                    </Text>
+                  </LinearGradient>
+                </TouchableOpacity>
+              </View>
+
+              {/* Divider */}
+              <View style={styles.dividerContainer}>
+                <View style={styles.divider} />
+                <Text style={styles.dividerText}>or continue with</Text>
+                <View style={styles.divider} />
+              </View>
+
+              {/* Google Button */}
+              <TouchableOpacity style={styles.googleButton} onPress={continueWithGoogle}>
+                <Text style={styles.googleButtonText}>Continue with Google</Text>
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
 
       </SafeAreaView>
     </SafeAreaProvider>
@@ -248,13 +248,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   title: {
-     fontFamily:"Roboto-Bold" ,
+    fontFamily: "Roboto-Bold",
     fontSize: 24,
     // fontWeight: "700",
     color: "#111",
   },
   subtitle: {
-    fontFamily:"Roboto-Regular",
+    fontFamily: "Roboto-Regular",
     fontSize: 13,
     color: "#555",
     marginTop: 5,
@@ -285,7 +285,7 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   tabText: {
-    fontFamily:"Roboto-SemiBold",
+    fontFamily: "Roboto-SemiBold",
     fontSize: 14,
     // fontWeight: "600",
     color: "#555",
@@ -314,7 +314,7 @@ const styles = StyleSheet.create({
     color: "#111",
 
 
-  fontFamily:"Roboto-Regular"
+    fontFamily: "Roboto-Regular"
 
   },
   button: {
@@ -324,7 +324,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#fff",
-    fontFamily:"Roboto-SemiBold" ,
+    fontFamily: "Roboto-SemiBold",
     fontSize: 16,
   },
   dividerContainer: {
@@ -340,7 +340,7 @@ const styles = StyleSheet.create({
   dividerText: {
     marginHorizontal: 10,
     fontSize: 12,
-    fontFamily:"Roboto-Regular",
+    fontFamily: "Roboto-Regular",
     color: "#888",
   },
   googleButton: {
@@ -357,7 +357,7 @@ const styles = StyleSheet.create({
   googleButtonText: {
     marginLeft: 10,
     fontSize: 14,
-    fontFamily:"Roboto-SemiBold" ,
+    fontFamily: "Roboto-SemiBold",
     // fontWeight: "600",
     color: "#111",
   },

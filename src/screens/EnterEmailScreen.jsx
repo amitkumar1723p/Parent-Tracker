@@ -20,7 +20,7 @@ import { useSendOtpMutation } from "../redux/api/authApi";
 export default function EnterEmailScreen() {
   const [email, setEmail] = useState("");
   const [sendOtp] = useSendOtpMutation();
- const handleMutation = useHandleMutation();
+  const handleMutation = useHandleMutation();
 
   const loading = useSelector(state => state.alert.loadingMap.sendOtpLoading);
 
@@ -62,37 +62,37 @@ export default function EnterEmailScreen() {
 
 
 
-         <TouchableOpacity
-  disabled={loading || !email}
- onPress={
-  async ()=>{
-      let res = await handleMutation({
-              apiFunc: sendOtp,
-              params: { email},
-              label :'sendOtpLoading',
+          <TouchableOpacity
+            disabled={loading || !email}
+            onPress={
+              async () => {
+                let res = await handleMutation({
+                  apiFunc: sendOtp,
+                  params: { email },
+                  label: 'sendOtpLoading',
 
-            })
-             if(res.status){
-               navigate("VerifyOtp" ,{ email })
+                })
+                if (res.status) {
+                  navigate("VerifyOtp", { email })
 
-             }
+                }
 
-               }}
+              }}
 
             style={{ marginTop: 15 }}
-  activeOpacity={0.7}
->
-  <LinearGradient
-    colors={["#007BFF", "#00C851"]}
-    style={[styles.button,   (loading || !email) && { opacity: 0.6 }]}
-  >
-    {loading ? (
-      <ActivityIndicator size="small" color="#fff" />
-    ) : (
-      <Text style={styles.buttonText}>Send OTP</Text>
-    )}
-  </LinearGradient>
-</TouchableOpacity>
+            activeOpacity={0.7}
+          >
+            <LinearGradient
+              colors={["#007BFF", "#00C851"]}
+              style={[styles.button, (loading || !email) && { opacity: 0.6 }]}
+            >
+              {loading ? (
+                <ActivityIndicator size="small" color="#fff" />
+              ) : (
+                <Text style={styles.buttonText}>Send OTP</Text>
+              )}
+            </LinearGradient>
+          </TouchableOpacity>
 
 
           {/* Info Box */}
