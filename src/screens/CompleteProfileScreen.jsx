@@ -16,7 +16,6 @@ import { useSelector } from "react-redux";
 import BottomSheetModal from "../components/BottomSheetModal";
 import useHandleMutation from "../hooks/useHandleMutation";
 import { useCompleteProfileMutation } from "../redux/api/authApi";
-
 // ⚠️ OPTIONAL: if you use react-native-image-picker, uncomment and install
 // import { launchImageLibrary } from "react-native-image-picker";
 
@@ -420,7 +419,7 @@ const styles = StyleSheet.create({
     backgroundColor: "red"
   },
   avatarImg: { width: "100%", height: "100%" },
-  cameraBtn: { position: "absolute", bottom: -2, right: -2  , zIndex:2},
+  cameraBtn: { position: "absolute", bottom: -2, right: -2, zIndex: 2 },
   cameraInner: {
     // width: 28, height: 28, borderRadius: 14, justifyContent: "center", alignItems: "center",
     width: 32,
