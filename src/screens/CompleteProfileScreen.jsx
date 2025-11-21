@@ -17,8 +17,7 @@ import BottomSheetModal from "../components/BottomSheetModal";
 import useHandleMutation from "../hooks/useHandleMutation";
 import { useCompleteProfileMutation } from "../redux/api/authApi";
 // ⚠️ OPTIONAL: if you use react-native-image-picker, uncomment and install
-// import { launchImageLibrary } from "react-native-image-picker";
-
+import { PermissionsAndroid } from "react-native";
 const FEATURES = {
   parent: [
     { icon: "group", text: "Track multiple children" },
@@ -75,10 +74,7 @@ export default function CompleteProfileScreen() {
   const [userData, setUserData] = useState({})
 
   const onPickPhoto = async () => {
-    // If image-picker installed:
-    // const res = await launchImageLibrary({ mediaType: "photo", selectionLimit: 1 });
-    // const uri = res?.assets?.[0]?.uri;
-    // if (uri) setPhoto(uri);
+
 
     // UI-only fallback (no dep): Set a demo avatar
     setPhoto("https://i.pravatar.cc/200?img=5");
@@ -97,11 +93,89 @@ export default function CompleteProfileScreen() {
       label: 'completeProfileLoading',
     })
 
-    console.log(res, "response")
-    // UI only — add API later
-    // validate UI quickly
-    // if (!name || !phone || !role) return;
-    // replace("Home");
+
+  };
+
+
+
+
+  // request to Camera Permission time Permission
+  const requestCameraPermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.CAMERA,
+        {
+          title: "Camera Permission",
+          message: "SafeTracker needs access to your camera",
+          buttonPositive: "OK",
+        }
+      );
+      return granted === PermissionsAndroid.RESULTS.GRANTED;
+    } catch (err) {
+      return false;
+    }
+  };
+
+  // request to Gallery Permission time Permission
+  const requestGalleryPermission = async () => {
+    const readPermission =
+      PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES ||
+      PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE;
+
+    try {
+      const granted = await PermissionsAndroid.request(readPermission);
+      return granted === PermissionsAndroid.RESULTS.GRANTED;
+    } catch (err) {
+      return false;
+    }
+  };
+  // open Camera
+  const openCamera = async () => {
+    const ok = await requestCameraPermission();
+    if (!ok) return;
+
+    launchCamera(
+      {
+        mediaType: "photo",
+        cameraType: "front",
+        quality: 0.8,
+        saveToPhotos: false,
+      },
+      (res) => {
+        if (res.didCancel || res.errorCode) return;
+
+        const img = res.assets?.[0];
+        if (img?.uri) {
+          setPhoto(img); // FULL asset object
+        }
+
+        setPhotoSheet(false);
+      }
+    );
+  };
+
+  // Open Gallery
+  const openGallery = async () => {
+    const ok = await requestGalleryPermission();
+    if (!ok) return;
+
+    launchImageLibrary(
+      {
+        mediaType: "photo",
+        quality: 0.8,
+        selectionLimit: 1,
+      },
+      (res) => {
+        if (res.didCancel || res.errorCode) return;
+
+        const img = res.assets?.[0];
+        if (img?.uri) {
+          setPhoto(img);
+        }
+
+        setPhotoSheet(false);
+      }
+    );
   };
 
   return (
@@ -342,52 +416,36 @@ export default function CompleteProfileScreen() {
         ))}
       </BottomSheetModal>
 
-      {/* DOB Sheet (UI only; pick a few quick dates)
-      <BottomSheetModal visible={dobSheet} title="Select Date of Birth" onClose={() => setDobSheet(false)}>
-        {[
-          "01-01-2000",
-          "15-06-2002",
-          "20-10-2005",
-          "01-01-2010",
-          "Custom…",
-        ].map((d) => (
-          <TouchableOpacity
-            key={d}
-            activeOpacity={0.9}
-            onPress={() => {
-              if (d === "Custom…") {
-                // Add your native DateTimePicker here later
-                // For now just close
-                setDobSheet(false);
-              } else {
-                onSelectDob(d);
-              }
-            }}
-            style={styles.sheetRow}
-          >
-            <Text style={styles.sheetText}>{d}</Text>
-            {dob === d && <AntDesign name="checkcircle" size={18} color="#4A90FF" />}
-          </TouchableOpacity>
-        ))}
-      </BottomSheetModal> */}
 
-      {/* Photo Sheet */}
+
+      {/* Photo Sheet  start -------------------------- */}
       <BottomSheetModal visible={photoSheet} title="Profile Photo" onClose={() => setPhotoSheet(false)}>
-        <TouchableOpacity activeOpacity={0.9} onPress={onPickPhoto} style={styles.sheetRow}>
-          <MaterialCommunityIcons name="image-multiple" size={18} color="#4A90FF" />
-          <Text style={[styles.sheetText, { marginLeft: 8 }]}>Choose from gallery</Text>
+
+        {/* Live Camera Selfie */}
+        <TouchableOpacity activeOpacity={0.9} onPress={openCamera} style={styles.sheetRow}>
+          <MaterialCommunityIcons name="camera" size={20} color="#4A90FF" />
+          <Text style={[styles.sheetText, { marginLeft: 10 }]}>Take a Live Selfie</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={0.9}
-          onPress={() => setPhoto(null)}
-          style={styles.sheetRow}
-        >
-          <MaterialCommunityIcons name="delete-outline" size={18} color="#E45858" />
-          <Text style={[styles.sheetText, { marginLeft: 8, color: "#E45858" }]}>
-            Remove photo
-          </Text>
+
+        {/* Upload from Gallery */}
+        <TouchableOpacity activeOpacity={0.9} onPress={openGallery} style={styles.sheetRow}>
+          <MaterialCommunityIcons name="image-multiple" size={20} color="#4A90FF" />
+          <Text style={[styles.sheetText, { marginLeft: 10 }]}>Upload from Gallery</Text>
         </TouchableOpacity>
+
+        {/* Remove */}
+        {photo && (
+          <TouchableOpacity activeOpacity={0.9} onPress={() => { setPhoto(null); }} style={styles.sheetRow}>
+            <MaterialCommunityIcons name="delete-outline" size={20} color="#E45858" />
+            <Text style={[styles.sheetText, { marginLeft: 10, color: "#E45858" }]}>Remove Photo</Text>
+          </TouchableOpacity>
+        )}
+
       </BottomSheetModal>
+
+
+
+      {/* Photo Sheet  end -------------------------- */}
     </SafeAreaView>
   );
 }
