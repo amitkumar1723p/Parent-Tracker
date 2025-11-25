@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import {
-  View,
+  ScrollView,
+  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  Image,
-  StyleSheet,
-  ScrollView,
+  View
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { navigate } from "../navigation/NavigationService";
 import Icon from "react-native-vector-icons/Ionicons";
+import { navigate } from "../navigation/NavigationService";
 
 const AddChildScreen = () => {
   const [name, setName] = useState("");
@@ -24,85 +23,84 @@ const AddChildScreen = () => {
   };
 
   const handleContinue = () => {
-    console.log({ name, age, photo });
     navigate('add-invite')
-    // navigation.navigate("NextScreen");
+
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={['bottom' ,"right" ,"left"]}>
+    <SafeAreaView style={styles.container} edges={['bottom', "right", "left"]}>
 
-            <ScrollView  showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingTop:13}}>
-      {/* Header */}
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingTop: 13 }}>
+        {/* Header */}
 
 
-      {/* Top Icon */}
-      <View style={styles.topIcon}>
-        <Icon name="person-add-outline" size={40} color="#4CAF50" />
-      </View>
+        {/* Top Icon */}
+        <View style={styles.topIcon}>
+          <Icon name="person-add-outline" size={40} color="#4CAF50" />
+        </View>
 
-      {/* Title */}
-      <Text style={styles.title}>Add Your Child  </Text>
-      <Text style={styles.subtitle}>
-        Enter your child's details to get started
-      </Text>
+        {/* Title */}
+        <Text style={styles.title}>Add Your Child  </Text>
+        <Text style={styles.subtitle}>
+          Enter your child's details to get started
+        </Text>
 
-      {/* Form */}
-      <View style={styles.form}>
-        {/* Child's Name */}
-        <View style={styles.field}>
-          <Text style={styles.label}>Child's Name</Text>
-          <View style={styles.inputWrapper}>
-<Icon name="person-outline" size={20} color="#777" />
-            <TextInput
-              style={styles.input}
-              placeholder="Enter child's name"
-              value={name}
-              onChangeText={setName}
-            />
+        {/* Form */}
+        <View style={styles.form}>
+          {/* Child's Name */}
+          <View style={styles.field}>
+            <Text style={styles.label}>Child's Name</Text>
+            <View style={styles.inputWrapper}>
+              <Icon name="person-outline" size={20} color="#777" />
+              <TextInput
+                style={styles.input}
+                placeholder="Enter child's name"
+                value={name}
+                onChangeText={setName}
+              />
+            </View>
+          </View>
+
+          {/* Age */}
+          <View style={styles.field}>
+            <Text style={styles.label}>Age</Text>
+            <View style={styles.inputWrapper}>
+              <Icon name="calendar-outline" size={20} color="#777" />
+              <TextInput
+                style={styles.input}
+                placeholder="Enter age"
+                keyboardType="numeric"
+                value={age}
+                onChangeText={setAge}
+              />
+            </View>
+          </View>
+
+          {/* Profile Photo */}
+          <View style={styles.field}>
+            <Text style={styles.label}>Profile Photo (Optional)</Text>
+            <View style={styles.photoRow}>
+              <TouchableOpacity style={styles.photoPlaceholder}>
+                <Icon name="camera-outline" size={30} color="#aaa" />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.photoButton}
+                onPress={handleChoosePhoto}
+              >
+                <Text style={styles.photoButtonText}>Choose Photo</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
 
-        {/* Age */}
-        <View style={styles.field}>
-          <Text style={styles.label}>Age</Text>
-          <View style={styles.inputWrapper}>
-                      <Icon name="calendar-outline" size={20} color="#777" />
-            <TextInput
-              style={styles.input}
-              placeholder="Enter age"
-              keyboardType="numeric"
-              value={age}
-              onChangeText={setAge}
-            />
-          </View>
-        </View>
+        {/* Continue Button */}
+        <TouchableOpacity onPress={handleContinue} style={styles.buttonWrapper}>
+          <LinearGradient colors={["#007BFF", "#00C851"]} style={styles.button}>
+            <Text style={styles.buttonText}>Continue</Text>
+          </LinearGradient>
+        </TouchableOpacity>
 
-        {/* Profile Photo */}
-        <View style={styles.field}>
-          <Text style={styles.label}>Profile Photo (Optional)</Text>
-          <View style={styles.photoRow}>
-            <TouchableOpacity style={styles.photoPlaceholder}>
-                  <Icon name="camera-outline" size={30} color="#aaa" />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.photoButton}
-              onPress={handleChoosePhoto}
-            >
-              <Text style={styles.photoButtonText}>Choose Photo</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-
-      {/* Continue Button */}
-      <TouchableOpacity onPress={handleContinue} style={styles.buttonWrapper}>
-        <LinearGradient colors={["#007BFF", "#00C851"]} style={styles.button}>
-          <Text style={styles.buttonText}>Continue</Text>
-        </LinearGradient>
-      </TouchableOpacity>
-
-</ScrollView>
+      </ScrollView>
 
 
 
@@ -141,7 +139,7 @@ const styles = StyleSheet.create({
     // fontWeight: "700",
     textAlign: "center",
     marginBottom: 6,
-    fontFamily:"Roboto-Bold" ,
+    fontFamily: "Roboto-Bold",
 
   },
   subtitle: {
@@ -149,7 +147,7 @@ const styles = StyleSheet.create({
     color: "#777",
     textAlign: "center",
     marginBottom: 20,
-fontFamily:"Roboto-Regular" ,
+    fontFamily: "Roboto-Regular",
   },
   form: {
     marginTop: 10,
@@ -162,10 +160,10 @@ fontFamily:"Roboto-Regular" ,
     // fontWeight: "500",
     color: "#333",
     marginBottom: 6,
-    fontFamily:"Roboto-SemiBold" ,
+    fontFamily: "Roboto-SemiBold",
   },
   inputWrapper: {
-     flexDirection: "row",
+    flexDirection: "row",
     alignItems: "center",
     borderWidth: 1,
     borderColor: "#ddd",
@@ -177,15 +175,15 @@ fontFamily:"Roboto-Regular" ,
   input: {
     flex: 1,
     paddingVertical: 10,
-     marginLeft: 8,
+    marginLeft: 8,
     fontSize: 16,
-    fontFamily:"Roboto-Regular" ,
+    fontFamily: "Roboto-Regular",
   },
-    photoLabel: {
+  photoLabel: {
     fontSize: 14,
     color: "#444",
     marginBottom: 10,
-    fontFamily:"Roboto-Regular" ,
+    fontFamily: "Roboto-Regular",
   },
   photoRow: {
     flexDirection: "row",
@@ -213,7 +211,7 @@ fontFamily:"Roboto-Regular" ,
     fontSize: 14,
     color: "#007BFF",
     // fontWeight: "600",
-    fontFamily:"Roboto-SemiBold" ,
+    fontFamily: "Roboto-SemiBold",
   },
   buttonWrapper: {
     marginTop: "auto",
@@ -230,6 +228,6 @@ fontFamily:"Roboto-Regular" ,
     // fontWeight: "700",
 
     color: "#fff",
-    fontFamily:"Roboto-Bold" ,
+    fontFamily: "Roboto-Bold",
   },
 });

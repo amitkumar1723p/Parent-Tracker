@@ -17,7 +17,9 @@ import BottomSheetModal from "../components/BottomSheetModal";
 import useHandleMutation from "../hooks/useHandleMutation";
 import { useCompleteProfileMutation } from "../redux/api/authApi";
 // ⚠️ OPTIONAL: if you use react-native-image-picker, uncomment and install
+import { useRoute } from "@react-navigation/native";
 import { PermissionsAndroid } from "react-native";
+import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 const FEATURES = {
   parent: [
     { icon: "group", text: "Track multiple children" },
@@ -37,8 +39,9 @@ export default function CompleteProfileScreen() {
   const loading = useSelector(
     (s) => s?.alert?.loadingMap?.completeProfileLoading === true
   );
-
-  const [photo, setPhoto] = useState(null);
+  const route = useRoute();
+  const { email } = route.params;
+  const [userProfilePhoto, setuserProfilePhoto] = useState(null);
 
   const [gender, setGender] = useState(null);
   const [dob, setDob] = useState(null);
@@ -73,28 +76,45 @@ export default function CompleteProfileScreen() {
   const handleMutation = useHandleMutation();
   const [userData, setUserData] = useState({})
 
-  const onPickPhoto = async () => {
 
 
-    // UI-only fallback (no dep): Set a demo avatar
-    setPhoto("https://i.pravatar.cc/200?img=5");
-    setPhotoSheet(false);
-  };
 
-  const onSelectDob = (d) => {
-    setDob(d);
-    setDobSheet(false);
-  };
 
   const onSubmit = async () => {
+    const formData = new FormData();
+    formData.append("name", userData.name);
+    formData.append("phone", userData.phone);
+    formData.append("role", userData.role);
+    formData.append("gender", userData.gender || "");
+    formData.append("email", email);
+
+    // only if user selected image
+    if (userProfilePhoto) {
+      formData.append("profilePhoto", {
+        uri: userProfilePhoto,
+        type: "image/jpeg",
+        name: "profile.jpg"
+      });
+    }
     let res = await handleMutation({
       apiFunc: completeProfile,
-      params: { ...userData, email: "coder1338@gmail.com" },
-      label: 'completeProfileLoading',
-    })
+      params: formData,
+      label: "completeProfileLoading",
+    });
+
+
+
+    if (res.status) {
+      if (res.AuthenticationToken) {
+        await saveAuth(res.AuthenticationToken, res.user);
+      }
+    }
+
 
 
   };
+
+
 
 
 
@@ -103,12 +123,7 @@ export default function CompleteProfileScreen() {
   const requestCameraPermission = async () => {
     try {
       const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.CAMERA,
-        {
-          title: "Camera Permission",
-          message: "SafeTracker needs access to your camera",
-          buttonPositive: "OK",
-        }
+        PermissionsAndroid.PERMISSIONS.CAMERA
       );
       return granted === PermissionsAndroid.RESULTS.GRANTED;
     } catch (err) {
@@ -116,23 +131,41 @@ export default function CompleteProfileScreen() {
     }
   };
 
-  // request to Gallery Permission time Permission
-  const requestGalleryPermission = async () => {
-    const readPermission =
-      PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES ||
-      PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE;
 
+
+
+
+
+  const requestGalleryPermission = async () => {
     try {
-      const granted = await PermissionsAndroid.request(readPermission);
-      return granted === PermissionsAndroid.RESULTS.GRANTED;
+      if (Platform.Version >= 33) {
+        // ANDROID 13+
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES
+        );
+        return granted === PermissionsAndroid.RESULTS.GRANTED;
+      } else {
+        // ANDROID 12 AND BELOW
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE
+        );
+        return granted === PermissionsAndroid.RESULTS.GRANTED;
+      }
     } catch (err) {
+      console.log("Gallery Permission Error: ", err);
       return false;
     }
   };
+
+
+
+
   // open Camera
   const openCamera = async () => {
     const ok = await requestCameraPermission();
     if (!ok) return;
+
+
 
     launchCamera(
       {
@@ -142,11 +175,15 @@ export default function CompleteProfileScreen() {
         saveToPhotos: false,
       },
       (res) => {
+
         if (res.didCancel || res.errorCode) return;
 
         const img = res.assets?.[0];
+
+
+
         if (img?.uri) {
-          setPhoto(img); // FULL asset object
+          setuserProfilePhoto(img?.uri)
         }
 
         setPhotoSheet(false);
@@ -155,9 +192,14 @@ export default function CompleteProfileScreen() {
   };
 
   // Open Gallery
+
+
   const openGallery = async () => {
     const ok = await requestGalleryPermission();
-    if (!ok) return;
+    if (!ok) {
+      console.log("Permission not granted");
+      return;
+    }
 
     launchImageLibrary(
       {
@@ -166,17 +208,28 @@ export default function CompleteProfileScreen() {
         selectionLimit: 1,
       },
       (res) => {
-        if (res.didCancel || res.errorCode) return;
+        if (res.didCancel) {
+          console.log("User cancelled");
+          return;
+        }
+
+        if (res.errorCode) {
+          console.log("Picker Error:", res.errorMessage);
+          return;
+        }
 
         const img = res.assets?.[0];
+
         if (img?.uri) {
-          setPhoto(img);
+          setuserProfilePhoto(img.uri);
         }
 
         setPhotoSheet(false);
       }
     );
   };
+
+
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -213,8 +266,8 @@ export default function CompleteProfileScreen() {
               <View style={styles.avatarOuter}>
                 <Image
                   source={
-                    photo
-                      ? { uri: photo }
+                    userProfilePhoto
+                      ? { uri: userProfilePhoto }
                       : require("../../assets/images/amit.jpg") /* add a 120x120 placeholder in assets */
                   }
                   style={styles.avatarImg}
@@ -225,7 +278,7 @@ export default function CompleteProfileScreen() {
             <Text style={styles.tapText}>Tap to add photo</Text>
           </View>
 
-          {console.log(userData, "userData")}
+
           {/* Name */}
           <View style={styles.inputWrapper}>
             <MaterialCommunityIcons name="account-outline" size={18} color="#9AA7AD" />
@@ -434,8 +487,8 @@ export default function CompleteProfileScreen() {
         </TouchableOpacity>
 
         {/* Remove */}
-        {photo && (
-          <TouchableOpacity activeOpacity={0.9} onPress={() => { setPhoto(null); }} style={styles.sheetRow}>
+        {userProfilePhoto && (
+          <TouchableOpacity activeOpacity={0.9} onPress={() => { setuserProfilePhoto(null); }} style={styles.sheetRow}>
             <MaterialCommunityIcons name="delete-outline" size={20} color="#E45858" />
             <Text style={[styles.sheetText, { marginLeft: 10, color: "#E45858" }]}>Remove Photo</Text>
           </TouchableOpacity>

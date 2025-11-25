@@ -20,13 +20,16 @@ export const authApi = baseApi.injectEndpoints({
     }),
 
 
-   completeProfile: builder.mutation({
-      query: body => ({
-        url:  '/api/auth/v1/complete-profile',
-        method: 'POST',
-        body,
-      }),
-    }),
+
+completeProfile: builder.mutation({
+  query: (formData) => ({
+    url: '/api/auth/v1/complete-profile',
+    method: 'POST',
+    body: formData,
+    // 👇 IMPORTANT
+    formData: true,
+  }),
+}),
 
 
 

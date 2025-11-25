@@ -17,8 +17,7 @@ const OnboardingScreen = () => {
 
   // Navigate to login when finish
   const onFinish = () => {
-    // navigate("EnterEmail");
-    navigate("CompleteProfile", { email: "coder1338@gmail.com" })
+    navigate("EnterEmail");
 
   };
 

@@ -5,7 +5,7 @@ import { getToken } from '../../utils/keychainStorage';
 export const baseApi = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://10.46.94.12:4000', // ✅ Replace this
+    baseUrl: 'http://10.199.116.12:4000', // ✅ Replace this
 
     // credentials: 'include', // ⬅️ enable cookies if needed
 

@@ -72,18 +72,11 @@ export default function Login() {
             <LinearGradient
               style={[
                 styles.header,
-                // {
-                //   paddingTop: insets.top + 40, // responsive top padding (status bar safe)
-                // },
               ]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
               colors={["#eff6ff", "#f0fdf4"]}
             >
-
-
-
-
 
               <LinearGradient
                 colors={["#007BFF", "#00C851"]}
@@ -94,10 +87,6 @@ export default function Login() {
 
 
               <Text style={styles.title}>SafeTracker</Text>
-
-
-
-
 
 
               <View>

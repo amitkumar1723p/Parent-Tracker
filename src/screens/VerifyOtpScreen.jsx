@@ -15,10 +15,10 @@ import { useSelector } from "react-redux";
 import useHandleMutation from "../hooks/useHandleMutation";
 import { navigate } from "../navigation/NavigationService";
 import { useVerifyOtpMutation } from "../redux/api/authApi";
-
+import { saveAuth } from '../utils/authStorage';
 export default function VerifyOtpScreen({ route }) {
   const [verifyOtp] = useVerifyOtpMutation();
- const handleMutation = useHandleMutation();
+  const handleMutation = useHandleMutation();
   const loading = useSelector(state => state.alert.loadingMap.sendOtpLoading);
   const { email } = route.params;
 
@@ -72,31 +72,37 @@ export default function VerifyOtpScreen({ route }) {
 
           {/* Verify Button */}
           <TouchableOpacity style={{ marginTop: 20 }}
-          disabled={loading}
-          activeOpacity={0.7}
+            disabled={loading}
+            activeOpacity={0.7}
             onPress={
-              async ()=>{
-                  let res = await handleMutation({
-                          apiFunc: verifyOtp,
-                          params: { otp:otp.join('') , email},
-                          label :'verifyOtpLoading',
-                        })
+              async () => {
+                let res = await handleMutation({
+                  apiFunc: verifyOtp,
+                  params: { otp: otp.join(''), email },
+                  label: 'verifyOtpLoading',
+                })
 
-   console.log(res ,"response  verify otp")
-                         if(res.status&&!res.token){
-                           navigate("CompleteProfile" ,{ email })
+                if (res.status) {
+                  if (res.AuthenticationToken) {
+                    await saveAuth(res.AuthenticationToken, res.user);
+                  }
+                  else {
+                    navigate("CompleteProfile", { email })
+                  }
+                }
 
-                         }
-
-                           }}
 
 
-           >
+
+              }}
+
+
+          >
 
             <LinearGradient colors={["#007BFF", "#00C851"]} style={styles.button}>
-               {
-                loading ? <ActivityIndicator size="small" color="#fff" />:<Text style={styles.buttonText}>Verify</Text>
-               }
+              {
+                loading ? <ActivityIndicator size="small" color="#fff" /> : <Text style={styles.buttonText}>Verify</Text>
+              }
 
             </LinearGradient>
           </TouchableOpacity>

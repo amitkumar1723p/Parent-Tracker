@@ -19,7 +19,6 @@ import EnterEmailScreen from "../screens/EnterEmailScreen";
 import Login from "../screens/Login";
 import OnboardingScreen from "../screens/Onboarding/OnboardingScreen";
 import ParentDashboardScreen from "../screens/ParentDashboardScreen";
-import RoleSelector from "../screens/RoleSelector";
 import VerifyOtpScreen from "../screens/VerifyOtpScreen";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -33,7 +32,7 @@ function ParentTabs() {
         tabBarShowLabel: true,
         tabBarStyle: { backgroundColor: "#fff" },
 
-tabBarLabelStyle: {
+  tabBarLabelStyle: {
       fontFamily: 'Roboto-Regular', // 👈 yahan font lagana hai
       fontSize: 12,
       color: '#000', // optional, agar chaahe toh
@@ -99,16 +98,11 @@ const AppNavigator = () => {
         {/* Auth Screens */}
         <Stack.Screen name="onboarding" component={OnboardingScreen} />
         <Stack.Screen name="login" component={Login} />
-        <Stack.Screen name="role-selector" component={RoleSelector} />
+        {/* <Stack.Screen name="role-selector" component={RoleSelector} /> */}
         <Stack.Screen name="EnterEmail" component={EnterEmailScreen} />
 <Stack.Screen name="VerifyOtp" component={VerifyOtpScreen} />
 <Stack.Screen name="CompleteProfile" component={CompleteProfileScreen} />
-{/* <Stack.Screen name="VerifyOtp" component={VerifyOtpScreen} />
-<Stack.Screen name="CompleteProfile" component={CompleteProfileScreen} /> */}
 
-        {/* <Stack.Screen name="child" component={ConnectToParentScreen} />
-
-        */}
 
 
 
@@ -156,7 +150,27 @@ const AppNavigator = () => {
         />
         <Stack.Screen name="add-invite" component={AddInviteScreen} />
 
+
+
+
+
+
+
+{/* Without Login Screen  */}
+
+
+
       </Stack.Navigator>
+
+
+
+
+
+
+
+
+
+
     </NavigationContainer>
   );
 };

@@ -1,9 +1,38 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+
+<!-- Android 11+ (API 30+) ke liye required:
+     Yeh declare karta hai ki app device ke CAMERA app ko use kar sakti hai.
+     Image Picker camera kholne ke liye IMAGE_CAPTURE intent use karta hai.
+     Agar yeh add nahi hoga to camera open nahi hoga (silent fail). -->
+<!-- <queries>
+    <intent>
+        <action android:name="android.media.action.IMAGE_CAPTURE" />
+    </intent>
+</queries> -->
+
+
+ <!-- Internet access for API calls, sockets, image upload, maps, and real-time tracking -->
+<uses-permission android:name="android.permission.INTERNET" />
+
+<!-- Camera permission: Used only when user takes a live selfie for profile picture.
+     Required for react-native-image-picker to open the device camera. -->
+<uses-permission android:name="android.permission.CAMERA"/>
+
+<!-- Android 12 & below (API <= 32): Required to allow user to pick profile image from gallery.
+     Used only for reading user-selected media, not for background storage access. -->
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+<!-- Legacy write permission (Android 10 & below): Required only when saving camera-captured
+     images temporarily before upload. Not used for modifying user’s files. -->
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+<!-- Android 13+ (API 33+): New permission required for selecting images from gallery.
+     This is mandatory for accessing user-selected photos securely. -->
+<uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+
+
+
 
     <application
       android:name=".MainApplication"
