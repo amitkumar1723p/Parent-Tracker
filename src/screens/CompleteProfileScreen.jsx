@@ -20,6 +20,8 @@ import { useCompleteProfileMutation } from "../redux/api/authApi";
 import { useRoute } from "@react-navigation/native";
 import { PermissionsAndroid } from "react-native";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
+import { getAuth } from "../utils/authStorage";
+import mmkvStorage from "../utils/mmkvstorage";
 const FEATURES = {
   parent: [
     { icon: "group", text: "Track multiple children" },
@@ -96,6 +98,9 @@ export default function CompleteProfileScreen() {
         name: "profile.jpg"
       });
     }
+
+
+    console.log('completeProfileLoading', '-----------------------------------------------------------')
     let res = await handleMutation({
       apiFunc: completeProfile,
       params: formData,
@@ -106,6 +111,8 @@ export default function CompleteProfileScreen() {
 
     if (res.status) {
       if (res.AuthenticationToken) {
+
+        console.log(res, "Response opbject")
         await saveAuth(res.AuthenticationToken, res.user);
       }
     }
@@ -422,7 +429,17 @@ export default function CompleteProfileScreen() {
           </TouchableOpacity> */}
           {/* ------------------------------DOB----------------------------- */}
           {/* Button */}
-          <TouchableOpacity activeOpacity={0.9} onPress={onSubmit} disabled={loading}>
+          <TouchableOpacity activeOpacity={0.9}
+            // onPress={onSubmit}
+            onPress={async () => {
+              // console.log("mmkvStorage.getAllData()", mmkvStorage.getAllData())
+              const data = mmkvStorage.getAllData();
+              // console.log(data, 'DATA')
+              // console.log(getToken(), "Get token")
+              console.log(await getAuth(), "getAuth")
+
+            }}
+            disabled={loading}>
             <LinearGradient
               colors={["#7CB4FF", "#6EE2A4"]}
               style={[styles.ctaBtn, loading && { opacity: 0.6 }]}

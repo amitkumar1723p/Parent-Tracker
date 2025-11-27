@@ -10,12 +10,8 @@ const USER_KEY = "user";
 // ----------------------------
 export async function saveAuth(token, user) {
   try {
-    // Save token in Keychain (secure)
-    await storeToken(token);
-
-    // Save user in MMKV (fast)
-    mmkvStorage.setItem(USER_KEY, user);
-
+    await storeToken(token);             // Save token securely
+    mmkvStorage.setItem(USER_KEY, user); // Save user fast in MMKV
     return true;
   } catch (e) {
     console.log("saveAuth error:", e);
@@ -28,8 +24,11 @@ export async function saveAuth(token, user) {
 // ----------------------------
 export async function getAuth() {
   try {
+    console.log("getAuth .................");
+
     const token = await getToken();
     const user = mmkvStorage.getItem(USER_KEY);
+          
 
     return { token, user };
   } catch (e) {
@@ -43,8 +42,8 @@ export async function getAuth() {
 // ----------------------------
 export async function removeAuth() {
   try {
-    await removeToken();
-    mmkvStorage.removeItem(USER_KEY);
+    await removeToken();                    // remove secure token
+    mmkvStorage.removeItem(USER_KEY);       // remove user
     return true;
   } catch (e) {
     console.log("removeAuth error:", e);

@@ -32,11 +32,11 @@ function ParentTabs() {
         tabBarShowLabel: true,
         tabBarStyle: { backgroundColor: "#fff" },
 
-  tabBarLabelStyle: {
-      fontFamily: 'Roboto-Regular', // 👈 yahan font lagana hai
-      fontSize: 12,
-      color: '#000', // optional, agar chaahe toh
-    },
+        tabBarLabelStyle: {
+          fontFamily: 'Roboto-Regular', // 👈 yahan font lagana hai
+          fontSize: 12,
+          color: '#000', // optional, agar chaahe toh
+        },
 
         tabBarIcon: ({ focused, color }) => {
           let iconName;
@@ -59,34 +59,7 @@ function ParentTabs() {
   );
 }
 
-// ---------------- Child Tabs ----------------
-function ChildTabs() {
-  return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        headerShown: false,
-        tabBarShowLabel: true,
-        tabBarStyle: { backgroundColor: "#fff", height: 60 },
-        tabBarIcon: ({ focused, color }) => {
-          let iconName;
-          if (route.name === "Home") iconName = focused ? "home" : "home-outline";
-          else if (route.name === "SOS") iconName = focused ? "alert" : "alert-outline";
-          else if (route.name === "Battery") iconName = focused ? "battery-full" : "battery-half-outline";
-          else if (route.name === "Settings") iconName = focused ? "settings" : "settings-outline";
 
-          return <Ionicons name={iconName} size={22} color={color} />;
-        },
-        tabBarActiveTintColor: "#007BFF",
-        tabBarInactiveTintColor: "#888",
-      })}
-    >
-      <Tab.Screen name="Home" component={ChildDashboardScreen} />
-      <Tab.Screen name="SOS" component={ChildDashboardScreen} />
-      <Tab.Screen name="Battery" component={ChildDashboardScreen} />
-      <Tab.Screen name="Settings" component={ChildDashboardScreen} />
-    </Tab.Navigator>
-  );
-}
 
 // ---------------- Main Stack ----------------
 const AppNavigator = () => {
@@ -95,82 +68,78 @@ const AppNavigator = () => {
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {/* Auth Screens */}
+
+        {/* Without LOgin Screen */}
+        {/* Auth Screens   ----------------------start */}
         <Stack.Screen name="onboarding" component={OnboardingScreen} />
         <Stack.Screen name="login" component={Login} />
-        {/* <Stack.Screen name="role-selector" component={RoleSelector} /> */}
         <Stack.Screen name="EnterEmail" component={EnterEmailScreen} />
-<Stack.Screen name="VerifyOtp" component={VerifyOtpScreen} />
-<Stack.Screen name="CompleteProfile" component={CompleteProfileScreen} />
+        <Stack.Screen name="VerifyOtp" component={VerifyOtpScreen} />
+        <Stack.Screen name="CompleteProfile" component={CompleteProfileScreen} />
+
+
+
+        {/* Auth Screens   ----------------------end */}
 
 
 
 
-
- {/* Child Connection Screens (Header Show karna hai) */}
-  <Stack.Screen
-    name="child"
-    component={ConnectToParentScreen}
-    options={{
-      headerShown: true,
-      title: 'Connect To Parent', // yahan apna custom name likh
-      headerTitleAlign: 'center',
-
-       headerTitleStyle: {
-      fontFamily: 'Roboto-Regular', // 👈 yahan font apply kiya
-      fontSize: 18,                 // optional (custom size)
-      color: '#000',                // optional (custom color)
-    },
-    }}
-  />
 
         <Stack.Screen name="parent-child-connect" component={ConnectedSuccessScreen} />
 
-        {/* Parent Flow */}
-        <Stack.Screen name="parent-dashboard" component={ParentTabs} />
+        {/* Parent Flow  role parent Screen --------------------------------------- start*/}
+        <Stack.Screen name="parent-dashboard" component={ParentTabs} />   {/*   //  role parent main screen */}
 
-        {/* Child Flow */}
-        <Stack.Screen name="child-dashboard" component={ChildDashboardScreen} />
         <Stack.Screen name="add-child-screen" component={AddChildScreen}
-
-
-    options={{
-      headerShown: true,
-      title: 'Add Child', // yahan apna custom name likh
-      headerTitleAlign: 'center',
-          headerTitleStyle: {
-      fontFamily: 'Roboto-Regular', // 👈 yahan font apply kiya
-      fontSize: 18,                 // optional (custom size)
-      color: '#000',                // optional (custom color)
-    },
-
-    }}
+          options={{
+            headerShown: true,
+            title: 'Add Child', // yahan apna custom name likh
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              fontFamily: 'Roboto-Regular', // 👈 yahan font apply kiya
+              fontSize: 18,                 // optional (custom size)
+              color: '#000',                // optional (custom color)
+            },
+          }}
 
 
         />
+
         <Stack.Screen name="add-invite" component={AddInviteScreen} />
 
 
+        {/* Parent Flow  role parent Screen --------------------------------------- end*/}
+
+
+        {/* Child Flow */}
+
+        {/* { Child Routes   role child screen --------------------------- start } */}
 
 
 
+        {/* Child Connection Screens (Header Show karna hai) */}
+        <Stack.Screen         //  role child main screen
+          name="child"
+          component={ConnectToParentScreen}
+          options={{
+            headerShown: true,
+            title: 'Connect To Parent', // yahan apna custom name likh
+            headerTitleAlign: 'center',
 
+            headerTitleStyle: {
+              fontFamily: 'Roboto-Regular', // 👈 yahan font apply kiya
+              fontSize: 18,                 // optional (custom size)
+              color: '#000',                // optional (custom color)
+            },
+          }}
+        />
+        <Stack.Screen name="child-dashboard" component={ChildDashboardScreen} />
 
-{/* Without Login Screen  */}
+        {/* { Child Routes   role child screen --------------------------- end } */}
 
 
 
       </Stack.Navigator>
-
-
-
-
-
-
-
-
-
-
     </NavigationContainer>
   );
 };

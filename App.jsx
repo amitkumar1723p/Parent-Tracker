@@ -4,17 +4,30 @@ import { Provider } from 'react-redux';
 import CustomToastStack from './src/components/Tost/CustomToastStack';
 import AppNavigator from './src/navigation/AppNavigator.js';
 import { store } from './src/redux/store';
+import mmkvStorage from './src/utils/mmkvstorage.js';
 import './src/utils/setupGlobalFont';
 const App = () => {
 
-    console.log( store ,"store")
+
+
+  // useEffect(async () => {
+
+  console.log(mmkvStorage.getAllData(), "Hello")
+
+  // mmkvStorage.setItem("user", { name: "ami" })
+
+  // }, [])
+
+
+
+
   return (
     <>
-<Provider store={store}>
+      <Provider store={store}>
 
- <AppNavigator />
-   <CustomToastStack />
-</Provider>
+        <AppNavigator />
+        <CustomToastStack />
+      </Provider>
 
     </>
 
