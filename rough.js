@@ -1,17 +1,83 @@
-// ---------------- Child Tabs ----------------
-function ChildTabs() {
+// // ---------------- Child Tabs ----------------
+// function ChildTabs() {
+//   return (
+//     <Tab.Navigator
+//       screenOptions={({ route }) => ({
+//         headerShown: false,
+//         tabBarShowLabel: true,
+//         tabBarStyle: { backgroundColor: "#fff", height: 60 },
+//         tabBarIcon: ({ focused, color }) => {
+//           let iconName;
+//           if (route.name === "Home") iconName = focused ? "home" : "home-outline";
+//           else if (route.name === "SOS") iconName = focused ? "alert" : "alert-outline";
+//           else if (route.name === "Battery") iconName = focused ? "battery-full" : "battery-half-outline";
+//           else if (route.name === "Settings") iconName = focused ? "settings" : "settings-outline";
+
+//           return <Ionicons name={iconName} size={22} color={color} />;
+//         },
+//         tabBarActiveTintColor: "#007BFF",
+//         tabBarInactiveTintColor: "#888",
+//       })}
+//     >
+//       <Tab.Screen name="Home" component={ChildDashboardScreen} />
+//       <Tab.Screen name="SOS" component={ChildDashboardScreen} />
+//       <Tab.Screen name="Battery" component={ChildDashboardScreen} />
+//       <Tab.Screen name="Settings" component={ChildDashboardScreen} />
+
+
+//     </Tab.Navigator>
+//     <Stack.Screen name="role-selector" component={RoleSelector} />
+//   );
+// }
+
+
+
+
+
+
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from "react";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { navigationRef } from './NavigationService';
+
+// Screens
+import AddChildScreen from "../screens/AddChildScreen";
+import AddInviteScreen from '../screens/AddInviteScreen';
+import ChildDashboardScreen from "../screens/ChildDashboardScreen";
+import CompleteProfileScreen from "../screens/CompleteProfileScreen";
+import ConnectToParentScreen from "../screens/ConnectToParentScreen";
+import ConnectedSuccessScreen from "../screens/ConnectedSuccessScreen";
+import EnterEmailScreen from "../screens/EnterEmailScreen";
+import Login from "../screens/Login";
+import OnboardingScreen from "../screens/Onboarding/OnboardingScreen";
+import ParentDashboardScreen from "../screens/ParentDashboardScreen";
+import VerifyOtpScreen from "../screens/VerifyOtpScreen";
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+// ---------------- Parent Tabs ----------------
+function ParentTabs() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarShowLabel: true,
-        tabBarStyle: { backgroundColor: "#fff", height: 60 },
+        tabBarStyle: { backgroundColor: "#fff" },
+
+        tabBarLabelStyle: {
+          fontFamily: 'Roboto-Regular', // 👈 yahan font lagana hai
+          fontSize: 12,
+          color: '#000', // optional, agar chaahe toh
+        },
+
         tabBarIcon: ({ focused, color }) => {
           let iconName;
           if (route.name === "Home") iconName = focused ? "home" : "home-outline";
-          else if (route.name === "SOS") iconName = focused ? "alert" : "alert-outline";
-          else if (route.name === "Battery") iconName = focused ? "battery-full" : "battery-half-outline";
-          else if (route.name === "Settings") iconName = focused ? "settings" : "settings-outline";
+          else if (route.name === "History") iconName = focused ? "time" : "time-outline";
+          else if (route.name === "Geofencing") iconName = focused ? "map" : "map-outline";
+          else if (route.name === "Summary") iconName = focused ? "stats-chart" : "stats-chart-outline";
 
           return <Ionicons name={iconName} size={22} color={color} />;
         },
@@ -19,13 +85,99 @@ function ChildTabs() {
         tabBarInactiveTintColor: "#888",
       })}
     >
-      <Tab.Screen name="Home" component={ChildDashboardScreen} />
-      <Tab.Screen name="SOS" component={ChildDashboardScreen} />
-      <Tab.Screen name="Battery" component={ChildDashboardScreen} />
-      <Tab.Screen name="Settings" component={ChildDashboardScreen} />
-
-
+      <Tab.Screen name="Home" component={ParentDashboardScreen} />
+      <Tab.Screen name="History" component={ParentDashboardScreen} />
+      <Tab.Screen name="Geofencing" component={ParentDashboardScreen} />
+      <Tab.Screen name="Summary" component={ParentDashboardScreen} />
     </Tab.Navigator>
-    <Stack.Screen name="role-selector" component={RoleSelector} />
   );
 }
+
+
+
+// ---------------- Main Stack ----------------
+const AppNavigator = () => {
+
+
+
+  return (
+    <NavigationContainer ref={navigationRef}>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+
+        {/* Without LOgin Screen */}
+        {/* Auth Screens   ----------------------start */}
+        <Stack.Screen name="onboarding" component={OnboardingScreen} />
+        <Stack.Screen name="login" component={Login} />
+        <Stack.Screen name="EnterEmail" component={EnterEmailScreen} />
+        <Stack.Screen name="VerifyOtp" component={VerifyOtpScreen} />
+        <Stack.Screen name="CompleteProfile" component={CompleteProfileScreen} />
+
+
+
+        {/* Auth Screens   ----------------------end */}
+
+
+
+
+
+
+
+        {/* Parent Flow  role parent Screen --------------------------------------- start*/}
+        <Stack.Screen name="parent-dashboard" component={ParentTabs} />   {/*   //  role parent main screen */}
+
+        <Stack.Screen name="add-child-screen" component={AddChildScreen}
+          options={{
+            headerShown: true,
+            title: 'Add Child', // yahan apna custom name likh
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              fontFamily: 'Roboto-Regular', // 👈 yahan font apply kiya
+              fontSize: 18,                 // optional (custom size)
+              color: '#000',                // optional (custom color)
+            },
+          }}
+
+
+        />
+
+        <Stack.Screen name="add-invite" component={AddInviteScreen} />
+
+
+        {/* Parent Flow  role parent Screen --------------------------------------- end*/}
+
+
+        {/* Child Flow */}
+
+        {/* { Child Routes   role child screen --------------------------- start } */}
+
+
+
+        {/* Child Connection Screens (Header Show karna hai) */}
+        <Stack.Screen         //  role child main screen
+          name="child"
+          component={ConnectToParentScreen}
+          options={{
+            headerShown: true,
+            title: 'Connect To Parent', // yahan apna custom name likh
+            headerTitleAlign: 'center',
+
+            headerTitleStyle: {
+              fontFamily: 'Roboto-Regular', //   yahan font apply kiya
+              fontSize: 18,                 // optional (custom size)
+              color: '#000',                // optional (custom color)
+            },
+          }}
+        />
+        <Stack.Screen name="parent-child-connect" component={ConnectedSuccessScreen} />
+        <Stack.Screen name="child-dashboard" component={ChildDashboardScreen} />
+
+        {/* { Child Routes   role child screen --------------------------- end } */}
+
+
+
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+export default AppNavigator;

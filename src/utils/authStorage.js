@@ -5,6 +5,17 @@ import mmkvStorage from "./mmkvstorage";
 
 const USER_KEY = "user";
 
+
+export const authChangeListeners = [];
+
+export const triggerAuthChanged = () => {
+  authChangeListeners.forEach(cb => cb());
+};
+
+export const onAuthChanged = (cb) => {
+  authChangeListeners.push(cb);
+};
+
 // ----------------------------
 // 🔐 SAVE AUTH DATA
 // ----------------------------
@@ -12,6 +23,8 @@ export async function saveAuth(token, user) {
   try {
     await storeToken(token);             // Save token securely
     mmkvStorage.setItem(USER_KEY, user); // Save user fast in MMKV
+
+    triggerAuthChanged(); // 🧠 Notify AppNavigator
     return true;
   } catch (e) {
     console.log("saveAuth error:", e);
@@ -28,7 +41,7 @@ export async function getAuth() {
 
     const token = await getToken();
     const user = mmkvStorage.getItem(USER_KEY);
-          
+
 
     return { token, user };
   } catch (e) {
@@ -50,3 +63,7 @@ export async function removeAuth() {
     return false;
   }
 }
+
+
+
+

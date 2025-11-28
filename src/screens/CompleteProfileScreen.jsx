@@ -20,8 +20,6 @@ import { useCompleteProfileMutation } from "../redux/api/authApi";
 import { useRoute } from "@react-navigation/native";
 import { PermissionsAndroid } from "react-native";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
-import { getAuth } from "../utils/authStorage";
-import mmkvStorage from "../utils/mmkvstorage";
 const FEATURES = {
   parent: [
     { icon: "group", text: "Track multiple children" },
@@ -430,15 +428,15 @@ export default function CompleteProfileScreen() {
           {/* ------------------------------DOB----------------------------- */}
           {/* Button */}
           <TouchableOpacity activeOpacity={0.9}
-            // onPress={onSubmit}
-            onPress={async () => {
-              // console.log("mmkvStorage.getAllData()", mmkvStorage.getAllData())
-              const data = mmkvStorage.getAllData();
-              // console.log(data, 'DATA')
-              // console.log(getToken(), "Get token")
-              console.log(await getAuth(), "getAuth")
+            onPress={onSubmit}
+            // onPress={async () => {
+            //   // console.log("mmkvStorage.getAllData()", mmkvStorage.getAllData())
+            //   const data = mmkvStorage.getAllData();
+            //   // console.log(data, 'DATA')
+            //   // console.log(getToken(), "Get token")
+            //   console.log(await getAuth(), "getAuth")
 
-            }}
+            // }}
             disabled={loading}>
             <LinearGradient
               colors={["#7CB4FF", "#6EE2A4"]}
