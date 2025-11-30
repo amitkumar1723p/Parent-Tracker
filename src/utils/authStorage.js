@@ -23,7 +23,7 @@ export async function saveAuth(token, user) {
   try {
     await storeToken(token);             // Save token securely
     mmkvStorage.setItem(USER_KEY, user); // Save user fast in MMKV
-
+    console.log("run ......... triggerAuthChanged")
     triggerAuthChanged(); // 🧠 Notify AppNavigator
     return true;
   } catch (e) {

@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { getAuth } from "../utils/authStorage";
+import { getAuth, onAuthChanged } from "../utils/authStorage";
 import { navigationRef } from "./NavigationService";
 
 // Screens
@@ -83,10 +83,11 @@ const SplashScreen = () => (
 const AppNavigator = () => {
   const [userRole, setUserRole] = useState(null);
   const [appReady, setAppReady] = useState(false);
-
+  console.log(userRole, "userRole")
   useEffect(() => {
     const checkAuth = async () => {
       const auth = await getAuth();
+      console.log(auth, "auth")
       if (auth?.token && auth?.user?.role) {
         setUserRole(auth.user.role);
       } else {
