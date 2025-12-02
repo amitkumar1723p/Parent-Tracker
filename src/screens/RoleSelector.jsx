@@ -38,12 +38,12 @@ export default function RoleSelectorScreen() {
     // placeholder: navigate or do API call
     console.log("Continue with role:", selectedRole);
 
-      if(selectedRole == "child") {
-navigate('child')
-      } else{
+    if (selectedRole == "child") {
+      navigate('child')
+    } else {
 
-navigate('parent-dashboard')
-      }
+      navigate('parent-dashboard')
+    }
     // navigation.navigate("NextScreen", { role: selectedRole });
   };
 
@@ -201,12 +201,12 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontSize: 20,
-    fontFamily:"Roboto-Bold",
+    fontFamily: "Roboto-Bold",
     color: "#0B1220",
   },
   subheading: {
     fontSize: 13,
-    fontFamily:"Roboto-Regular" ,
+    fontFamily: "Roboto-Regular",
     color: "#5B6B73",
     textAlign: "center",
     marginTop: 6,
@@ -265,14 +265,14 @@ const styles = StyleSheet.create({
     color: "#0B1220",
 
     // fontWeight: "700",
-     fontFamily:"Roboto-Bold"
+    fontFamily: "Roboto-Bold"
   },
   cardDesc: {
     marginTop: 6,
     fontSize: 12,
     color: "#58646C",
     lineHeight: 17,
-     fontFamily:"Roboto-Regular"
+    fontFamily: "Roboto-Regular"
   },
   checkWrap: {
     width: 36,
@@ -309,7 +309,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#112233",
     marginBottom: 10,
-    fontFamily:"Roboto-Bold"
+    fontFamily: "Roboto-Bold"
   },
   featureRow: {
     flexDirection: "row",
@@ -324,7 +324,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 13,
     color: "#51616A",
-    fontFamily:"Roboto-Regular"
+    fontFamily: "Roboto-Regular"
   },
 
   continueBtn: {
@@ -335,8 +335,8 @@ const styles = StyleSheet.create({
   continueText: {
     color: "#fff",
     // fontWeight: "700",
-     fontFamily:"Roboto-Bold",
+    fontFamily: "Roboto-Bold",
     fontSize: 16,
-     fontFamily:"Roboto-Regular"
+    fontFamily: "Roboto-Regular"
   },
 });

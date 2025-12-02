@@ -16,6 +16,9 @@ export const onAuthChanged = (cb) => {
   authChangeListeners.push(cb);
 };
 
+console.log(authChangeListeners, "authChangeListeners", authChangeListeners)
+
+
 // ----------------------------
 // 🔐 SAVE AUTH DATA
 // ----------------------------

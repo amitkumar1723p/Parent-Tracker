@@ -20,6 +20,7 @@ import { useCompleteProfileMutation } from "../redux/api/authApi";
 import { useRoute } from "@react-navigation/native";
 import { PermissionsAndroid } from "react-native";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
+import { saveAuth } from "../utils/authStorage";
 const FEATURES = {
   parent: [
     { icon: "group", text: "Track multiple children" },
@@ -98,7 +99,7 @@ export default function CompleteProfileScreen() {
     }
 
 
-    console.log('completeProfileLoading', '-----------------------------------------------------------')
+
     let res = await handleMutation({
       apiFunc: completeProfile,
       params: formData,
@@ -109,8 +110,6 @@ export default function CompleteProfileScreen() {
 
     if (res.status) {
       if (res.AuthenticationToken) {
-
-        console.log(res, "Response opbject")
         await saveAuth(res.AuthenticationToken, res.user);
       }
     }
@@ -429,12 +428,7 @@ export default function CompleteProfileScreen() {
           {/* Button */}
           <TouchableOpacity activeOpacity={0.9}
             onPress={onSubmit}
-            // onPress={async () => {
-            //   // console.log("mmkvStorage.getAllData()", mmkvStorage.getAllData())
-            //   const data = mmkvStorage.getAllData();
-            //   // console.log(data, 'DATA')
-            //   // console.log(getToken(), "Get token")
-            //   console.log(await getAuth(), "getAuth")
+
 
             // }}
             disabled={loading}>

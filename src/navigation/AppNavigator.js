@@ -83,11 +83,11 @@ const SplashScreen = () => (
 const AppNavigator = () => {
   const [userRole, setUserRole] = useState(null);
   const [appReady, setAppReady] = useState(false);
-  console.log(userRole, "userRole")
+
   useEffect(() => {
     const checkAuth = async () => {
       const auth = await getAuth();
-      console.log(auth, "auth")
+
       if (auth?.token && auth?.user?.role) {
         setUserRole(auth.user.role);
       } else {
@@ -106,6 +106,8 @@ const AppNavigator = () => {
     checkAuth(); // Initial auth check on app start
   }, []);
 
+
+  
 
 
   if (!appReady) return <SplashScreen />;

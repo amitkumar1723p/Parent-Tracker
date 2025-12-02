@@ -13,14 +13,14 @@ import {
 import LinearGradient from "react-native-linear-gradient";
 import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import useHandleMutation from '../hooks/useHandleMutation';
-import { useLoginMutation } from '../redux/api/authApi';
+// import useHandleMutation from '../hooks/useHandleMutation';
+// import { useLoginMutation } from '../redux/api/authApi';
 const { height } = Dimensions.get("window");
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
   const insets = useSafeAreaInsets();
-  const [login] = useLoginMutation();
-  const handleMutation = useHandleMutation(); // ✅ Hook ko pehle call karo
+  // const [login] = useLoginMutation();
+  // const handleMutation = useHandleMutation(); // ✅ Hook ko pehle call karo
   const [userData, setUserData] = useState({})
 
   useEffect(() => {
@@ -175,15 +175,15 @@ export default function Login() {
                 <TouchableOpacity
 
                   style={{ marginTop: 20 }}
-                  // onPress={() => navigate("role-selector")}
+                // onPress={() => navigate("role-selector")}
 
-                  onPress={async () => {
-                    let res = await handleMutation({
-                      apiFunc: login,
-                      params: { ...{ Name: "Amit" } },
-                    })
+                // onPress={async () => {
+                //   let res = await handleMutation({
+                //     apiFunc: login,
+                //     params: { ...{ Name: "Amit" } },
+                //   })
 
-                  }}
+                // }}
 
                 >
                   <LinearGradient
