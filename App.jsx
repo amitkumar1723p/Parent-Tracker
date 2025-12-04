@@ -11,7 +11,6 @@ const App = () => {
   return (
     <>
       <Provider store={store}>
-
         <AppNavigator />
         <CustomToastStack />
       </Provider>

@@ -46,7 +46,7 @@ export default function ParentDashboardScreen() {
 
   return (
     <SafeAreaView style={styles.safe}>
-      <ScrollView contentContainerStyle={{ paddingBottom: 100  } } showsVerticalScrollIndicator={false}  >
+      <ScrollView contentContainerStyle={{ paddingBottom: 100 }} showsVerticalScrollIndicator={false}  >
         {/* Header */}
         <View style={styles.header}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -113,10 +113,11 @@ export default function ParentDashboardScreen() {
         <View style={styles.card}>
           <View style={styles.childrenHeader}>
             <Text style={styles.cardTitle}>Children</Text>
-            <TouchableOpacity onPress={()=>{
-              navigate('add-child-screen')
+            <TouchableOpacity onPress={() => {
+              navigate('add-invite')
+
             }}>
-              <Text style={styles.addChild}>Add Child</Text>
+              <Text style={styles.addChild}>Connect Children</Text>
             </TouchableOpacity>
           </View>
 
@@ -190,12 +191,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   avatar: { width: 46, height: 46, borderRadius: 23 },
-  parentName: { fontSize: 16,  color: "#111", fontFamily:"Roboto-Bold"
+  parentName: {
+    fontSize: 16, color: "#111", fontFamily: "Roboto-Bold"
 
 
     // fontWeight: "700",
-   },
-  online: { fontSize: 13, color: "#28A745", marginTop: 4  , fontFamily:"Roboto-Regular" },
+  },
+  online: { fontSize: 13, color: "#28A745", marginTop: 4, fontFamily: "Roboto-Regular" },
   iconBtn: { marginLeft: 12 },
 
   statsRow: {
@@ -216,12 +218,14 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 2,
   },
-  statTitle: { fontSize: 13, color: "#666", marginTop: 6  , fontFamily:"Roboto-Regular"},
-  statValue: { fontSize: 16,
+  statTitle: { fontSize: 13, color: "#666", marginTop: 6, fontFamily: "Roboto-Regular" },
+  statValue: {
+    fontSize: 16,
 
     // fontWeight: "700",
 
-    marginTop: 2, color: "#111" , fontFamily:"Roboto-Bold" },
+    marginTop: 2, color: "#111", fontFamily: "Roboto-Bold"
+  },
 
   card: {
     backgroundColor: "#fff",
@@ -234,11 +238,13 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 2,
   },
-  cardTitle: { fontSize: 15,
+  cardTitle: {
+    fontSize: 15,
 
     // fontWeight: "700",
 
-    color: "#111"   , fontFamily:"Roboto-Bold"  },
+    color: "#111", fontFamily: "Roboto-Bold"
+  },
 
   map: {
     marginTop: 12,
@@ -254,43 +260,50 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginRight: 8,
   },
-  tagText: { fontSize: 12, color: "#28A745",  fontFamily:"Roboto-SemiBold" ,
+  tagText: {
+    fontSize: 12, color: "#28A745", fontFamily: "Roboto-SemiBold",
 
     // fontWeight: "600" ,
-   },
+  },
 
   childrenHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
-  addChild: { fontSize: 13,
+  addChild: {
+    fontSize: 13,
     // fontWeight: "600",
-     color: "#007BFF" ,fontFamily:"Roboto-SemiBold" },
+    color: "#007BFF", fontFamily: "Roboto-SemiBold"
+  },
   childRow: {
     flexDirection: "row",
     alignItems: "center",
     marginTop: 14,
   },
   childAvatar: { width: 50, height: 50, borderRadius: 14 },
-  childName: { fontSize: 15,
+  childName: {
+    fontSize: 15,
 
     // fontWeight: "700",
- fontFamily:"Roboto-Bold" ,
-    color: "#111" },
-  childLocation: { fontSize: 13, color: "#666", marginTop: 2 , fontFamily :"Roboto-Regular" },
+    fontFamily: "Roboto-Bold",
+    color: "#111"
+  },
+  childLocation: { fontSize: 13, color: "#666", marginTop: 2, fontFamily: "Roboto-Regular" },
   childStatusRow: { flexDirection: "row", alignItems: "center", marginTop: 6 },
-  childBattery: { fontSize: 12, marginLeft: 6, marginRight: 10, color: "#111"  ,fontFamily:"Roboto-Regular" },
+  childBattery: { fontSize: 12, marginLeft: 6, marginRight: 10, color: "#111", fontFamily: "Roboto-Regular" },
   statusBadge: {
     borderRadius: 10,
     paddingVertical: 2,
     paddingHorizontal: 8,
   },
-  statusText: { fontSize: 12,
+  statusText: {
+    fontSize: 12,
     //  fontWeight: "600",
 
-     fontFamily:"Roboto-SemiBold" ,},
-  childTime: { fontSize: 12, color: "#888" ,  fontFamily:"Roboto-Regular" ,},
+    fontFamily: "Roboto-SemiBold",
+  },
+  childTime: { fontSize: 12, color: "#888", fontFamily: "Roboto-Regular", },
 
   quickRow: { flexDirection: "row", marginTop: 14 },
   quickCard: {
@@ -299,12 +312,14 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 14,
   },
-  quickTitle: { fontSize: 14,
+  quickTitle: {
+    fontSize: 14,
 
     // fontWeight: "700",
 
-    marginTop: 6, color: "#111"  ,fontFamily:"Roboto-Bold" ,},
-  quickDesc: { fontSize: 12, color: "#666", marginTop: 2  , fontFamily:"Roboto-Regular" },
+    marginTop: 6, color: "#111", fontFamily: "Roboto-Bold",
+  },
+  quickDesc: { fontSize: 12, color: "#666", marginTop: 2, fontFamily: "Roboto-Regular" },
 
   bottomTabs: {
     position: "absolute",
@@ -319,6 +334,6 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   tab: { alignItems: "center" },
-  tabText: { fontSize: 12, color: "#888", marginTop: 2  , fontFamily:"Roboto-Regular" ,},
-  tabTextActive: { fontSize: 12, color: "#007BFF", marginTop: 2 , fontFamily:"Roboto-Regular" , },
+  tabText: { fontSize: 12, color: "#888", marginTop: 2, fontFamily: "Roboto-Regular", },
+  tabTextActive: { fontSize: 12, color: "#007BFF", marginTop: 2, fontFamily: "Roboto-Regular", },
 });
