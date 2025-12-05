@@ -52,6 +52,59 @@ react {
     //   The list of flags to pass to the Hermes compiler. By default is "-O", "-output-source-map"
     // hermesFlags = ["-O", "-output-source-map"]
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// hermes comment --start
+
+
+// =========================
+// Hermes: Production-ready config
+// Place this inside android/app/build.gradle (top-level, where project.ext.react is defined)
+// =========================
+
+// project.ext.react = [
+//     // ───────── CORE ─────────
+//     // Enable Hermes engine for JS execution. (Required)
+//     enableHermes: true,                 // ✅ Hermes ON
+
+//     // ───────── PRODUCTION OPTIMIZATIONS ─────────
+//     // Use the Hermes compiler (hermesc) to precompile bytecode during release builds.
+//     // This reduces startup time and gives better runtime performance in production.
+//     hermesCommand: "hermesc",           // ✅ Use hermesc for production builds
+
+//     // Optional: command for Hermes bytecode caching (if you have a custom hermesc path):
+//     // hermesCommand: "${rootProject.projectDir}/node_modules/hermes-engine/win64-bin/hermesc.exe"
+// ]
+
+// hermes comment --end
+// ---------------------------
+// PRODUCTION-ONLY (toggleable)
+// If you are actively developing and want faster debug builds or you need Chrome debugger,
+// you may comment-out production-only keys below (see instructions).
+// ---------------------------
+
+
+
+project.ext.react = [
+    enableHermes: true  // 👈 Enable Hermes
+]
 project.ext.vectoricons = [
     iconFontNames: ['AntDesign.ttf', 'Feather.ttf', 'MaterialIcons.ttf', 'MaterialCommunityIcons.ttf' ,'Ionicons.ttf'] // ✅ Correct font name
 ]

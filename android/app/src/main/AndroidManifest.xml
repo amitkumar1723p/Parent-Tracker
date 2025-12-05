@@ -12,6 +12,18 @@
 </queries> -->
 
 
+
+
+<queries>
+    <!-- Allow app to detect WhatsApp package -->
+    <package android:name="com.whatsapp" />
+
+    <!-- Required so canOpenURL(whatsapp://) returns true on Android 11+ -->
+    <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="whatsapp" />
+    </intent>
+</queries>
  <!-- Internet access for API calls, sockets, image upload, maps, and real-time tracking -->
 <uses-permission android:name="android.permission.INTERNET" />
 

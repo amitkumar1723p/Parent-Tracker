@@ -57,19 +57,43 @@ const AddInviteScreen = () => {
 
   // Open SMS app with pre-filled message body
   const handleSms = async () => {
-    const body = `Hey! Use this code to connect with me: ${inviteCode}`;
+    try {
+      // Ask permission
+      const permission = await Contacts.requestPermission();
 
-    // iOS & Android URLs are different
-    const url =
-      Platform.OS === "ios"
-        ? `sms:&body=${encodeURIComponent(body)}`
-        : `sms:?body=${encodeURIComponent(body)}`;
+      if (permission !== 'authorized') {
+        showToast("Contact permission denied");
+        return;
+      }
 
-    // Check SMS app available
-    const supported = await Linking.canOpenURL(url);
+      // Open contact picker
+      const contact = await Contacts.openContactForm();
 
-    supported ? Linking.openURL(url) : showToast("No SMS app available");
+      if (!contact || !contact.phoneNumbers?.length) {
+        showToast("This contact has no phone number");
+        return;
+      }
+
+      // Get first phone number
+      const phone = contact.phoneNumbers[0].number;
+
+      // Message
+      const body = `Hey! Use this code to connect with me: ${inviteCode}`;
+
+      // Create SMS URL for specific number
+      const url =
+        Platform.OS === "ios"
+          ? `sms:${phone}&body=${encodeURIComponent(body)}`
+          : `smsto:${phone}?body=${encodeURIComponent(body)}`;
+
+      Linking.openURL(url);
+
+    } catch (err) {
+      console.log(err);
+      showToast("Something went wrong");
+    }
   };
+
 
   // Direct WhatsApp send intent
   const handleWhatsApp = async () => {
